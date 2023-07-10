@@ -30,8 +30,16 @@ que se encuentra en el rango de peso bajo (i.e imc $<$ 18 )?
 6. Crea un vector que muestre la siguiente frase: El individuo tiene un imc de 
 (tu respuesta en 3). Hint : junta texto con el vector imc
 
+7. Copia la siguiente linea y correla en RStudio, que observas? Si hay algun error, intenta resolverlo
+```{r, eval = FALSE}
+mivector1 = c(1:100)
+mivector1 = (101:200)
+mivector3 = c(mivector1, mivector2)
+```
 
-## Problema 2. Vectores y dataframes
+
+
+## Problema 2. Vectores, dataframes y listas
 
 1. Crea un vector con los nombres de las categorias de imc segun la OMS (Bajo peso, Peso normal, Sobrepeso,
 Obesidad grado I, Obesidad grado II, Obesidad grado III) y llamalo cat_names
@@ -47,4 +55,8 @@ llamalo cat. Muestra tu vector y determina la clase del objeto
 5. Muestra unicamente las categorias de obesidad  del dataframe que creaste
 
 6. Accede a la columna cat
+
+7. Crea una lista que contenga el vector kg, el vector, imc y el dataframe imc_df
+
+8. Accede a la columna cat dentro de la lista
 
