@@ -19,8 +19,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r, echo=FALSE}
 download_link(
-  link = "https://github.com/rossanatorres/Rbasico/blob/main/slides/PASPE2023_R_BASICO_clase1.pdf",
-  button_label = "Descarga clase1.pdf",
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/slides/clase1.pdf",
+  button_label = "Descargar clase1.pdf",
   button_type = "primary",
   has_icon = TRUE,
   icon = "fa fa-save",
@@ -31,9 +31,20 @@ download_link(
 
 ```{r, echo=FALSE}
 download_link(
-  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/PASPE2023_R_BASICO_clase1.pdf",
-  button_label = "Descarga lab1.R",
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/lab1.R",
+  button_label = "Descargar lab1.R",
   button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw1.docx",
+  button_label = "Descargar tarea1.R",
+  button_type = "warning",
   has_icon = TRUE,
   icon = "fa fa-save",
   self_contained = FALSE
@@ -47,7 +58,7 @@ download_link(
 *	Introducción a tidyverse
 
 
-# Tareas
+# Tareas resueltas
 
 
 
