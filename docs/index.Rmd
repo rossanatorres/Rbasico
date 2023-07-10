@@ -6,6 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+library(downloadthis)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -28,3 +29,20 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/Slides/PASPE2023_R_BASICO_clase1.pdf",
+  button_label = "Download pdf file",
+  button_type = "danger",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+
+
+SI SI SI SI
+
