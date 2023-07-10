@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Notas de clase
 
 ## Clase 1. Introducción a R, R Studio y conceptos básicos de programación en R
+
 *	Ventajas de usar R
 *	Interfaces gráficas disponibles
 *	Introducción al lenguaje de programación
@@ -53,9 +54,23 @@ download_link(
 
 
 ## Clase 2.	Importación/exportación/manejo de datos
+
 *	Cómo importar/exportar datos
 *	Introducción al uso de paqueterías
 *	Introducción a tidyverse
+
+
+## Clase 3. Creación de gráficos y de funciones
+
+*	Tutorial del uso de ggplot y otros paquetes de graficación
+*	Creación de funciones y loops
+
+## Clase 4.	Estadísticas descriptivas y análisis estadísticos (Regresión lineal/no lineal, ANOVA, etc.)
+
+*	Introducción al análisis de datos en R
+*	Tutorial del paquete survey
+
+## Clase 5. Introducción a R Markdown y Shiny apps
 
 
 # Tareas resueltas

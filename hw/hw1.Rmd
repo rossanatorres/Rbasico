@@ -1,8 +1,8 @@
 ---
-title: "R básico"
+title: "PASPE 2023: R básico"
 subtitle: "Tarea 1"
 author: "Tu Nombre"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
   word_document: default
 ---
@@ -14,21 +14,37 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Problema 1. Operaciones 
 
-1. Covierte  155 libras a kg 
+1. Covierte  155 libras a kg (1 libra = 0.453592 kg) y guardalo en una variable llamada kg
 
-2. Convierte 160 cm a metros
+2. Convierte 160 cm a metros (100 cm = 1 mt) y guardalo en una variable llamada mt 
 
-3. Estima el indice de masa corporal (kg/(mt)^2) usando la respuesta de 1 y 2
+3. Estima el indice de masa corporal (kg/(mt)^2) usando la respuesta de 1 y 2 y 
+guardalo en una variable llamada imc
 
 4. Utilizando el indice de masa corporal (imc) que estimaste, ¿podrías concluír
 
 que se encuentra en el rango de peso bajo (i.e imc $<$ 18 )? 
 
+5 Crea un vector que contenga al vector kg, mt y bmi
 
-## Problema 2. Vectores
+6. Crea un vector que muestre la siguiente frase: El individuo tiene un imc de 
+(tu respuesta en 3). Hint : junta texto con el vector imc
 
-1. Crea un vector con las categorias de imc segun la OMS (nombres)
+
+## Problema 2. Vectores y dataframes
+
+1. Crea un vector con los nombres de las categorias de imc segun la OMS (Bajo peso, Peso normal, Sobrepeso,
+Obesidad grado I, Obesidad grado II, Obesidad grado III) y llamalo cat_names
 
 2. Muestra unicamente las categorias de obesidad  del vector que creaste
 
-3. 
+3. Crea un vector con las categorias de imc segun la OMS 
+(< 18, 18.5-24.9, 25-29.9, 30-34.5, 35-39.9, > 40) y 
+llamalo cat. Muestra tu vector y determina la clase del objeto
+
+4. Crea un dataframe llamado imc_df usando los vectores cat_names y cat. Nombra las columnas como names y cat.
+
+5. Muestra unicamente las categorias de obesidad  del dataframe que creaste
+
+6. Accede a la columna cat
+
