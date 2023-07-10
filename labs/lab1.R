@@ -83,7 +83,7 @@ d
 # operacion (?) con caracteres
 
 
-# class
+# funcion class
 
 # Indexar vectores 
 
@@ -171,8 +171,13 @@ sort(x, decreasing = T) # cambiar default
 
 
 # Crear listas =============================================================
+milista <- list(1:10, 1:20)
+names(lista) <- c("uno", "dos")
 
 
 # Accesar listas
+milista[[1]]
+milista$uno
+milista[["uno"]][10]
 
 
