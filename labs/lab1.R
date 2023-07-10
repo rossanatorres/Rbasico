@@ -4,14 +4,23 @@
 #  X es el valor asignado a x
 # escoger un nombre adecuado
 
-# Variable vacia
+val1 <- 1
+val1 = 2 # equivalente
 
+# Variable vacia
+vacia <- NA
+
+class(vacia)
 
 # Valor logico
 
+logico <- TRUE
+logico <- FALSE
+logico <- T
+logico <- F
 
 # Reescribir variable
-
+# cuidado!!!
 
 
 # Funcion class
@@ -20,44 +29,61 @@
 # Ver que hay dentro de variable
 
 # opcion 1
-
+val2 <- 2
+val2
 
 # opcion 2
-
+(val2 <- 2) # cuidado si no cerramos nos sale error
+#(val2 <- 2 usar esc para evitar quedarnos atorados en el codigo
 
 # opcion 3
+print(val2)
 
 
 # Hacer operaciones aritmeticas
 
+val3 <- val1 + val2
 
+val4 <- val3 + 2
 
 # Hacer operacion logica
 
-
-
+val4 > 8
+val4 < 8
+val4 <= 8
+val4 >= 8
+val4 == 6
 
 # Vectores =====================================================
 
 # Crear vector
 #1. Numericos
+mivector1 <- c(1, 2, 3)
+class(mivector1)
 
 # Dimension de un vector
 # funcion length, ver ayuda
-
+length(mivector1)
 
 # Operaciones con vectores
 # aritmeticas
 
+mivector1 + 1
+
+mivector2 <- c(4,5,6)
+
+mivector1 + mivector2
+
 
 # que observan?
-
-
+mivector1
+mivector2
+mivector1 + mivector2
 # logicas
 
 
 # class
-
+class(mivector1)
 
 # Asignar arreglo de valores 
 
@@ -67,7 +93,7 @@ x
 
 
 
-y <- rep(7, 4) # Creaar un vector que con tiene 4 7s
+y <- rep(x = 7, times = 4) # Crear un vector que con tiene 4 7s
 y
 
 
@@ -83,21 +109,30 @@ d
 
 
 # Vector vacio
-
+vec_vacio <- c()
 
 
 # 2. Caracteres 
 
+# Nombres de perritos mexicanos
+
+perritos <- c("Copito", 'Firulais')
+class(perritos)
+
+apellidos <- c("Torres", "Alvarez")
 
 
 # operacion (?) con caracteres
 
+nombres <- paste0(perritos, " ",apellidos)
 
-# funcion class
+resultado <- c(nombres, mivector)
+
 
 # Indexar vectores 
 
 z <- x + y
+
 length(z)# parentesis redondos son para funciones
 
 z[3] # parentesis cuadrados son para indices
@@ -108,27 +143,35 @@ z[1:3] #
 
 # Matrices ===============================================================
 
+mimatriz <- matrix(1, nrow = 4, ncol = 3)
 
 
-
+# Accesar elementos
 # estructura: matrix[filas,columnas]
 # OJO: mismo numero de filas entre columnas
-
-
-
+mimatriz[1,1] # elemento en fila 1, columna 1
+mimatriz[1,1:3] # primera fila, todas las columnas
+mimatriz[1,] # primera fila todas las columnas
+mimatriz[,2]
 # Dimension de matriz
+dim(mimatriz)
 
 
 
 # Nombrar columnas de matriz
+colnames(mimatriz) <- c("Columna1", "Columna2", "Columna3")
+mimatriz
+rownames(mimatriz) <- c("Fila1", "Fila2", "Fila3", "Fila4")
+mimatriz
 
-
+mimatriz["Fila2","Columna3"]
 
 # Dataframes  =============================================================
 
 # Crear un dataframe
 df <- data.frame(x, y, z)
-# OJO: mismo numero de filas entre columnas
+
+# OJO: mismo numero de filas entre columnas (vectores)
 
 df # Ver que hay dentro del dataframe
 df$x # Usa $ para acceder columnas
@@ -140,54 +183,91 @@ dim(df)
 
 # Nombrar columnas dataframe
 
+colnames(df) <- c("Columna1", "Columna2", "Columna3")
+df
 # Alternativa:
-
+df <- data.frame("columna1"= x, "columna2" = y, "columna3" =z)
+df
 
 # Obtener nombres de dataframe
-
+colnames(df)
 
 # Indexar dataframes
-df[3, 1] # estructura: df[filas,columnas]
-df[4, ]
+# estructura: df[filas,columnas]
+df[3, 1] # fila 3, columna 1
+df[4, ]  # fila 4, todas las columnas
 df[, 1]
+
 df[c(1, 2, 3), ] # Seleccionar mas de una fila
+df[1:3, ] # Seleccionar mas de una fila
+
+# pregunta que quiero contestar
+df[, 1] > 2
 
 df[df[, 1] > 2, ] # Operacion logica en fila
 
 # Que notan?
 
 
-df[c(FALSE, TRUE, TRUE, FALSE), ]
-df[c(T, F, F, T), ]
-
 
 
 
 # Hacer calculos/aplicar funciones
-sum(df[, 1])
+sum(df[, 1], na.rm = T)
 sum(x)
 
 
 # Reasignar valores
 df
+df[3, 2] # un elemento: fil 3 columna 2
 df[3, 2] <- 5 
+df[3, 2] <- c(5,2) # Para reasignar me tengo que fijar en la dimension!!!!
+dim(df[3, ])
+df[3, ] <- c(1,1,1) # Reasignar con misma dimension
+
+
+
+
 df
 
 
 # Ordenar valores de columnas
+
+
 sort(x, decreasing = F) # valor default
 sort(x, decreasing = T) # cambiar default
+rev(x)
 
+micaracter <- c("Bajo", "Medio", "Alto", "Muy alto")
+
+micaracter <- sort(micaracter, decreasing = T)
+
+# Crear factor para ordenar jerarquicamente 
+mifactor <- factor(micaracter, levels = c("Bajo", "Medio", "Alto", "Muy alto"))
+class(mifactor)
+
+df2 <- cbind.data.frame(df, "columna4" = mifactor)
+row <- data.frame("columna1"=1, "columna2"=1, "columna3"=1, "columna4" =1)
+df3 <- rbind.data.frame(df, row)
 
 
 # Crear listas =============================================================
-milista <- list(1:10, 1:20)
-names(lista) <- c("uno", "dos")
+# Arreglo de objetos de cualquier tamano
+milista <- list(1:10, 1:20, df2)
+names(milista) <- c("vector_uno", "vector_dos","data_frame")
 
 
 # Accesar listas
-milista[[1]]
-milista$uno
-milista[["uno"]][10]
+# Checar dimension de lista = numbero de elementos
+length(milista)
 
+milista[[1]] #accesar al primer elemento de la lista
+milista$vector_dos # accesar por nombre
+milista[["vector_uno"]][10] #accesar al elemento 10 del objeto 1
+milista$data_frame$columna1[1:3] #accesar al data frame, columna1 y los primeros 3 elementos de la columna
+
+#
+rm(val4) # borrar algun elemento
+ls() # ver el nombre detodos los elementos que tenemos en el environment
+rm(list=ls()) # remover todo
 
