@@ -2,7 +2,7 @@
 # Definir variables =====================================================
 
 #  X es el valor asignado a x
-
+# escoger un nombre adecuado
 
 # Variable vacia
 
