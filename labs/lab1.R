@@ -13,6 +13,7 @@
 # Reescribir variable
 
 
+
 # Funcion class
 
 
@@ -20,28 +21,40 @@
 
 # opcion 1
 
+
 # opcion 2
+
 
 # opcion 3
 
+
 # Hacer operaciones aritmeticas
+
 
 
 # Hacer operacion logica
 
 
+
+
 # Vectores =====================================================
 
-# 1. Numericos
+# Crear vector
+#1. Numericos
+
+# Dimension de un vector
+# funcion length, ver ayuda
+
 
 # Operaciones con vectores
-
 # aritmeticas
 
 
 # que observan?
 
+
 # logicas
+
 
 # class
 
@@ -52,9 +65,6 @@
 x <- 1:4 
 x
 
-# Dimension de un vector
-# Ir a ayuda
-length(x) # 
 
 
 y <- rep(7, 4) # Creaar un vector que con tiene 4 7s
@@ -90,8 +100,6 @@ d
 z <- x + y
 length(z)# parentesis redondos son para funciones
 
-# Ir a ayuda 
-
 z[3] # parentesis cuadrados son para indices
 z[2]
 z[1:3] # 
@@ -104,7 +112,7 @@ z[1:3] #
 
 
 # estructura: matrix[filas,columnas]
-
+# OJO: mismo numero de filas entre columnas
 
 
 
@@ -120,6 +128,8 @@ z[1:3] #
 
 # Crear un dataframe
 df <- data.frame(x, y, z)
+# OJO: mismo numero de filas entre columnas
+
 df # Ver que hay dentro del dataframe
 df$x # Usa $ para acceder columnas
 df$y
