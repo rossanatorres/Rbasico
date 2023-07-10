@@ -1,6 +1,6 @@
 ---
-title: "Untitled"
-author: "Rossana Torres-Alvarez"
+title: "Curso R básico"
+author: "Rossana Torres Alvarez"
 date: "`r Sys.Date()`"
 output: html_document
 ---
@@ -10,31 +10,18 @@ library(downloadthis)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+# Notas de clase
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Clase 1. Introducción a R, R Studio y conceptos básicos de programación en R
+*	Ventajas de usar R
+*	Interfaces gráficas disponibles
+*	Introducción al lenguaje de programación
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-```{r}
+```{r, echo=FALSE}
 download_link(
-  link = "https://github.com/rossanatorres/Rbasico/blob/main/Slides/PASPE2023_R_BASICO_clase1.pdf",
-  button_label = "Download pdf file",
-  button_type = "danger",
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/slides/PASPE2023_R_BASICO_clase1.pdf",
+  button_label = "Descarga clase1.pdf",
+  button_type = "primary",
   has_icon = TRUE,
   icon = "fa fa-save",
   self_contained = FALSE
@@ -42,7 +29,29 @@ download_link(
 ```
 
 
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/PASPE2023_R_BASICO_clase1.pdf",
+  button_label = "Descarga lab1.R",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
 
 
-SI SI SI SI
+## Clase 2.	Importación/exportación/manejo de datos
+*	Cómo importar/exportar datos
+*	Introducción al uso de paqueterías
+*	Introducción a tidyverse
+
+
+# Tareas
+
+
+
+# Archivos
+
+
 
