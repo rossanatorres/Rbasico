@@ -12,6 +12,25 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Problema 1.
-## Problema 2
+## Problema 1. Explorar la base Antropometria
+1. Muestra el numero de columnas 
+2. Muestra las primeras 15 observaciones
+3. Estima los cuartiles de talla
+4. Estima la talla minima y la talla maxima
+
+
+## Problema 2. Manejo de datos
+1. Crea una nueva variable llamada id, que junte las variables folio e intp
+2. Usa la funcion unique() para contar el numero de ids unicos.
+3. Selecciona las variables sexo, edad, peso y talla
+a) Usando base R
+b) Usando dplyr
+4. Crea una variable llamada imc y estima el indice de masa corporal
+(kg/(mt)^2)
+a) Usando base R
+b) Usando dplyr
+5. Crea una variable con las categorias de imc de la OMS. Apoyate utilizando los criterios usados en la tarea 1.
+a) Usando base R
+b) Usando dplyr
+6. Guarda un dataframe solo para mujeres y uno solo para hombres, llamalos mujeres_df y hombres_df.
 
