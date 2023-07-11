@@ -94,23 +94,6 @@ download_link(
 )
 ```
 
-## Clase 3. Creación de gráficos y de funciones
-
-*	Tutorial del uso de ggplot y otros paquetes de graficación
-*	Creación de funciones y loops
-
-## Clase 4.	Estadísticas descriptivas y análisis estadísticos (Regresión lineal/no lineal, ANOVA, etc.)
-
-*	Introducción al análisis de datos en R
-*	Tutorial del paquete survey
-
-## Clase 5. Introducción a R Markdown y Shiny apps
-
-
-# Tareas resueltas
-
-
-
 # Archivos
 
 ```{r, echo=FALSE}
