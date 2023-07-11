@@ -121,10 +121,18 @@ Antropometria$edad_cat[Antropometria$edad>=80] <- "80’s"
 # Verificar
 
 
-# Introduccion a tidyverse ===================================
+# Introduccion a dplyr ===================================
 
 # glimpse
 
+# Pipes
+
+x <- rnorm(10)
+x %>% max
+# es lo mismo que
+max(x)
+
+# Ventaja de pipes:
 
 # Seleccionar solo las columnas que me interesan
 
@@ -158,8 +166,8 @@ Antropometria$edad_cat[Antropometria$edad>=80] <- "80’s"
 # Verificar
 
 
-# Ventaja de pipes:
 
 
 # Exportar datos ======================================
-
+# save
+# write
