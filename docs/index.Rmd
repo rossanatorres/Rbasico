@@ -86,13 +86,56 @@ download_link(
 ```{r, echo=FALSE}
 download_link(
   link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw2.docx",
-  button_label = "Descargar tarea2.R",
+  button_label = "Descargar tarea2.docx",
   button_type = "warning",
   has_icon = TRUE,
   icon = "fa fa-save",
   self_contained = FALSE
 )
 ```
+
+
+## Clase 3.	Creación de gráficos y de funciones
+
+*	Tutorial del uso de ggplot y otros paquetes de graficación
+*	Creación de funciones y loops
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/slides/clase3.pdf",
+  button_label = "Descargar clase3.pdf",
+  button_type = "primary",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/lab3.R",
+  button_label = "Descargar lab3.R",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw3.docx",
+  button_label = "Descargar tarea3.docx",
+  button_type = "warning",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
 
 # Archivos
 
