@@ -147,6 +147,50 @@ download_link(
 ```
 
 
+## Clase 4
+
+* Funciones y for loops
+* Introducción a paquete survey
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/slides/clase4.pdf",
+  button_label = "Descargar clase4.pdf",
+  button_type = "primary",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/lab4.R",
+  button_label = "Descargar lab4.R",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw4.docx",
+  button_label = "Descargar tarea4.docx",
+  button_type = "warning",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+
+
+
+
 
 # Archivos
 

@@ -1,0 +1,15 @@
+---
+title: "PASPE 2023: R básico"
+subtitle: "Tarea 4"
+author: "Tu Nombre"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  word_document: default
+---
+
+
+```{r setup, include=FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
