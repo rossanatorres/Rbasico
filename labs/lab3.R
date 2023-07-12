@@ -92,14 +92,14 @@ ggplot() +
              aes(x = edad, y = talla), 
              color = "tomato3")
 
-# Ventaja de usar esta forma es que puedo agregar datos de distintas bases
-# agregando capas
-
 # Ejemplo:
+# Quiero separar mi grafica por sexo
+
 Mujeres <- filter(Antropometria, sexo == 2)
 
 Hombres <- filter(Antropometria, sexo == 1)
 
+# Notar que como tengo distintas bases debo hacer dos capas separadas
 ggplot() +
   # Capa de Hombres
   geom_point(data = Hombres, aes(x = edad, y = talla,
@@ -116,6 +116,14 @@ ggplot() +
              color = "Hombres")) +
   geom_point(data = Mujeres, aes(x = edad, y = talla, 
                                  color = "Mujeres")) 
+
+# Solucion mas sencilla:
+ggplot() +
+
+geom_point(data = Antropometria, aes(x = edad, y = talla,
+                               color = factor(sexo))) 
+  
+
 
 #Paso 3. Personalizo mi grafica agregando mas capas 
 
