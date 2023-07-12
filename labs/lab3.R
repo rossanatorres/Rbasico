@@ -134,3 +134,32 @@ ggplot() +
   labs(title = "Edad vs Talla", x = "Edad (años)",
        y = "Talla (cm)", color = "Sexo")
 
+
+
+# Para guardar nombro mi grafica con el nombre que quiera
+
+migrafica <- ggplot() +
+  geom_point(data = Hombres, aes(x = edad, y = talla,
+                                 color = "Hombres")) +
+  geom_point(data = Mujeres, aes(x = edad, y = talla, 
+                                 color = "Mujeres")) +
+  # Agrego titulo, nombres de ejes, nombre de escala de colores
+  labs(title = "Edad vs Talla", x = "Edad (años)",
+       y = "Talla (cm)", color = "Sexo")
+
+# Ahora para verla escribo el nombre
+migrafica
+
+
+# Opcion 1 de guardar
+ggsave("migrafica.png", migrafica)
+
+
+# Opcion 2 para guardar (mejor resolucion)
+# Siempre que usemos la funcion pdf
+pdf("~/Documents/GitHub/Rbasico/migrafica2.pdf",
+    width = 10, height = 7)
+
+migrafica # el objeto que queremos guardar
+
+dev.off()  # para que el GUI nos funcione bien
