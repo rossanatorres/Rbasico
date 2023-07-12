@@ -1,5 +1,6 @@
 rm(list = ls())
 library(tidyverse)
+#library()
 
 # Donde yo tengo los archivos que estare usando
 setwd("~/Documents/GitHub/Rbasico")
@@ -10,7 +11,7 @@ getwd()
 # Abrir base FFQ  ============================================
 
 # Yo tengo la base guardada aqui
-FFQ <- read_csv("files/ensanut_long.csv")
+FFQ <- read_csv("~/Documents/GitHub/Rbasico/files/ffq_long.csv")
 
 #FFQ <- FFQ <- read_csv("tu carpeta/ensanut_long.csv")
 
@@ -18,6 +19,13 @@ glimpse(FFQ)
 
 
 # Ventaja de usar pipes
+
+FFQ <- FFQ %>% 
+       select(identifier, sexo, edadanos, region, sexo, edadanos,
+              alimento, consumo) %>% 
+       mutate(edad_entero = round(edadanos)) #%>% 
+       #filter(sexo == "masculino")
+
 
 # seleccionar
 # filtrar
@@ -27,7 +35,21 @@ glimpse(FFQ)
 
 # consumo de ssb por tipo de bebidas
 
+tipobebidas <- FFQ %>% 
+               group_by(alimento) %>% 
+               summarise(ssb_tot = sum(consumo))
+
+
 # consumo de ssb por region
+
+region <- FFQ %>% 
+  group_by(region) %>% 
+  summarise(ssb_tot = sum(consumo))
+
+
+unique(FFQ$region)
+
+
 
 # Analisis por individuo
 nrow(FFQ)
@@ -37,7 +59,9 @@ ssb_unique1 <- FFQ %>%
   group_by(identifier) %>% 
   summarise(ssb_consumo = sum(consumo, na.rm = TRUE))
 
+# Opcion 1 hacer merge
 
+# Opcion 2
 ssb_notunique <- FFQ %>% 
        group_by(identifier) %>% 
        mutate(ssb_consumo = sum(consumo, na.rm = TRUE))

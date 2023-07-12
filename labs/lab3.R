@@ -27,27 +27,34 @@ Antropometria <- read_dta("files/Antropometria.dta")
 
 # ejemplo facil
 
+x <- 1:10
+y <- 1:10
+plot(x, y)
+
 
 # Usando talla y edad de base
 
-
+plot(Antropometria$edad, Antropometria$talla)
 
 # Investigar
-
+ver <- select(Antropometria, edad, talla)
 
 Antropometria <- filter(Antropometria, talla <222)
 
 # Personalizar 
+plot(Antropometria$edad, Antropometria$talla,
+     main = "Edad vs talla", xlab = "Edad (años)", ylab = "Talla (cm)",
+     col = "dodgerblue")
 
 
 
 # barplot
 
-#barplot(table(Antropometria$sexo))
+barplot(table(Antropometria$sexo))
 
 
 # hist
-
+hist(Antropometria$peso)
 
 # 2. Paquete ggplot2 *************************************
 
@@ -56,8 +63,6 @@ Antropometria <- filter(Antropometria, talla <222)
 # Paso 1. Lienzo
 ggplot()
 # Para agregar capas utilizo el simbolo +
-
-ggplot() 
 
 # Agrego mis datos y las variables que quiero graficar
 
@@ -109,13 +114,6 @@ ggplot() +
                                  color = "Mujeres")) 
 # Para poder saber a que corresponde el color
 
-# Convierto el color en un "aesthetic"
-ggplot() +
-
-  geom_point(data = Hombres, aes(x = edad, y = talla,
-             color = "Hombres")) +
-  geom_point(data = Mujeres, aes(x = edad, y = talla, 
-                                 color = "Mujeres")) 
 
 # Solucion mas sencilla:
 ggplot() +
