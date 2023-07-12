@@ -164,7 +164,7 @@ download_link(
 
 ```{r, echo=FALSE}
 download_link(
-  link = "https://github.com/rossanatorres/Rbasico/blob/main/files/ffq_long",
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/files/ffq_long.csv",
   button_label = "Descargar ffq_long.csv",
   button_type = "primary",
   has_icon = TRUE,

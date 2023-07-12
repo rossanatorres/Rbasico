@@ -3,17 +3,17 @@ library(tidyverse)
 #library()
 
 # Donde yo tengo los archivos que estare usando
-setwd("~/Documents/GitHub/Rbasico")
+#setwd("~/Documents/GitHub/Rbasico")
 
 # Verificar
-getwd() 
+#getwd() 
 
 # Abrir base FFQ  ============================================
 
 # Yo tengo la base guardada aqui
-FFQ <- read_csv("~/Documents/GitHub/Rbasico/files/ffq_long.csv")
+#FFQ <- read_csv("~/Documents/GitHub/Rbasico/files/ffq_long.csv")
 
-#FFQ <- FFQ <- read_csv("tu carpeta/ensanut_long.csv")
+FFQ <- FFQ <- read_csv("tu carpeta/ensanut_long.csv")
 
 glimpse(FFQ)
 
