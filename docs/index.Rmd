@@ -95,10 +95,10 @@ download_link(
 ```
 
 
-## Clase 3.	Creación de gráficos y de funciones
+## Clase 3.	Introducción a tidyverse (continuación) y creación de gráficos 
 
 *	Tutorial del uso de ggplot y otros paquetes de graficación
-*	Creación de funciones y loops
+
 
 
 ```{r, echo=FALSE}
@@ -106,6 +106,17 @@ download_link(
   link = "https://github.com/rossanatorres/Rbasico/blob/main/slides/clase3.pdf",
   button_label = "Descargar clase3.pdf",
   button_type = "primary",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/lab2.5.R",
+  button_label = "Descargar lab2.5.R",
+  button_type = "info",
   has_icon = TRUE,
   icon = "fa fa-save",
   self_contained = FALSE
@@ -149,5 +160,18 @@ download_link(
   self_contained = FALSE
 )
 ```
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/files/ffq_long",
+  button_label = "Descargar ffq_long.csv",
+  button_type = "primary",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
 
 
