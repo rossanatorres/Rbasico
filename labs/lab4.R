@@ -1,4 +1,4 @@
-rm(list =ls())
+rm(list =ls()) # limpiar environment
 library(tidyverse)
 library(haven)
 
@@ -40,16 +40,27 @@ Antropometria <- read_dta("~/Documents/GitHub/Rbasico/files/Antropometria.dta")
 # Ejemplo basico
 
 # estimar imc
+estIMC <- function(kg, mt){
+  
+  imc <- kg/(mt^2)
+  
+  return(imc)
 
- 
+}
+
+
 # Probar mi funcion
+estIMC(50, 1.53)
 
 
 # Probar mi funcion con base
 
+ver <- estIMC(Antropometria$peso, Antropometria$talla/100)
+summary(ver)
 
 # Guardar mi resultado en base
-
+Antropometria$imc <- estIMC(Antropometria$peso, 
+                            Antropometria$talla/100)
 
 # Ejemplo de codigo repetido que podemos volver funcion
 # ver laboratorio 2.5
@@ -65,7 +76,10 @@ agruparSumar <- function(data, grupo, sum_var){
   
 }
 
+# Probar
 res <- agruparSumar(FFQ, alimento, consumo)
+res2 <- agruparSumar(FFQ, region, consumo)
+res3 <- agruparSumar(FFQ, identifier, consumo)
 
 
 # if else statement ==================================
@@ -84,6 +98,29 @@ res <- agruparSumar(FFQ, alimento, consumo)
 
 # Verificar si un vector es numerico
 
+vectorNumerico <- function(vector){
+  
+  if(is.numeric(vector)){
+    
+    print("El vector es numerico")
+    
+  } else {
+    
+    print("El vector no es numerico")
+    
+  }
+  
+  
+  
+}
+
+x <- c(1,2,3)
+y <- c("Rossana", "Torres")
+z <- c(TRUE, FALSE, NA)
+
+vectorNumerico(x)
+vectorNumerico(y)
+vectorNumerico(z)
 
 # Multiples condiciones
 # Estructura general:
@@ -98,7 +135,8 @@ res <- agruparSumar(FFQ, alimento, consumo)
 # }
 
 # Ejemplo
-numero < 3
+numero <- -5
+
 if(numero < 0){
   print("El numero es negativo")
 } else if(numero == 0){
@@ -106,6 +144,7 @@ if(numero < 0){
 } else{
   print("El numero es positivo")
 }
+
 
 # CUIDADO La condición debe devolver o TRUE o FALSE, 
 #no un vector de TRUE/FALSE ni un elemento vacío
@@ -125,18 +164,19 @@ if(x > 1){
 
 # Iteraciones ==========================================
 
-
-for (elemento in secuencia) { 
-  
-   # alguna operacion
-    
-}
+# Cuerpo, NO CORRER
+# for (elemento in secuencia) { 
+#   
+#    # alguna operacion
+#     
+# }
 
 # Ejemplo facil:
+vector <- c("Rossana", "Torres", "Alvarez")
 
-for (i in 1:10) {
+for (i in 1:length(vector)) {
   
-  print(i)
+  print(vector[i])
   
 }
 
@@ -170,6 +210,8 @@ for (i in 1:length(x)) {
 }
 x
 
+
+
 # Aplicar funcion en vectores y guardar nuestro resultado
 
 # Problema: Calcular la mediana de cada columna
@@ -181,8 +223,21 @@ df <- data.frame(
 )
 
 median(df$a)
+median(df$b)
+median(df$c)
+median(df$d)
 
+medianas <- c()
 
+for (col in 1:ncol(df)) {
+  
+  #col <- 2
+  
+ median[col] <- (median(df[,col]))
+  
+}
+
+medianas
 
 # Paquete survey ======================================
 #install.packages("survey") # Recuerda que esto solo se instala una vez!!
