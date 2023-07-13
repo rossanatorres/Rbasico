@@ -13,3 +13,43 @@ library(tidyverse)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Problema 1. Funciones e if else statements
+
+1. Explica lo que hace esta función
+
+```{r, eval = FALSE}
+f3 <- function(x, y) {
+  rep(y, length.out = length(x))
+}
+```
+2. Escribe una función llamada vectorType, que tenga como input un vector y devuelva la frase: "El vector es numerico" o "El vector es caracter" o "El vector no es ni numerico ni caracter" (Hint: Usa las funciones is.numeric(), is.character())
+
+```{r, echo=FALSE}
+vectorType = function(vector){
+  if(is.numeric(vector)) {
+    print("El vector es numerico")
+  } else if (is.character(vector)){
+    print("El vector es caracter")
+  } else {
+    print("El vector no es ni numerico ni caracter")
+  }
+}
+
+```
+3. Prueba tu función con los siguientes vectores
+```{r}
+x = 1:10
+y = c("Copito", "Firulais")
+z = c(TRUE, FALSE, NA)
+
+```
+3. Explica la diferencia entre un if else statement y la función ifelse() que usamos en el laboratorio 2
+
+## Problema 2. For loops
+
+Escribir un for loop para:
+
+1. Calcular la media de cada columna en el dataframe mtcars.
+2. Determinar el tipo de cada columna en nycflights13::flights.
+3. Calcule el número de valores únicos en cada columna del dataframe iris.
+
