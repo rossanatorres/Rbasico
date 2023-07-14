@@ -187,6 +187,49 @@ download_link(
 ```
 
 
+## Clase 5
+
+* Funciones y for loops (continuación)
+* Introducción a paquete survey (continuación)
+* Introducción a paquete gtsummary
+* Introducción a R Markdown
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/slides/clase5.pdf",
+  button_label = "Descargar clase5.pdf",
+  button_type = "primary",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/lab5.R",
+  button_label = "Descargar lab5.R",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/lab5.5.R",
+  button_label = "Descargar lab5.5.R",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+
 
 
 
