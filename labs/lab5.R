@@ -38,6 +38,7 @@ table(Antropometria$imc_cat, exclude = NULL)
 # ANTES DE CREAR MI DISENO
 table(is.na(Antropometria$pondef))
 
+# Limpiar NAs
 Antropometria <- Antropometria %>% 
   drop_na(pondef)
 
@@ -68,7 +69,9 @@ coef(mi_media)
 SE(mi_media)
 attr(mi_media, "var")
 confint(svymean(~peso, design = mydesign))
-
+CI <- confint(mi_media)
+class(CI)
+dim(CI)
 
 # Estimar proporcion por categorias ======================
 
@@ -107,7 +110,7 @@ svyby(~imc_cat, by = ~factor(sexo), FUN = svymean,
 imctab<- svyby(~imc_cat, by = ~factor(sexo), FUN = svymean, 
                     design = mydesign, 
                     na.rm.all = TRUE)
-
+class(imctab)
 
 
 
@@ -123,12 +126,14 @@ col_names <- c("Hombres", "Mujeres")
 
 for (sex in 1:2) {
   
+  #sex <- 1
+  table[, col_names[sex]] <- (coef(svymean(~factor(imc_cat), 
+          design = subset(mydesign, 
+                          sexo == sex))))
   
-  table[, col_names[sex]] <- coef(svymean(~factor(imc_cat), 
-                               design = subset(mydesign, 
-                                               sexo == sex)))
   
 }
+
 
 # Muy bonito pero nos hacen falta los invervalos de confianza
 
@@ -150,7 +155,7 @@ upper_names <- c("hombres_upper", "mujeres_upper")
 
 for (sex in 1:2) {
   
-  
+  # Tabla de antes
   tableCI[, prop_names[sex]] <- coef(svymean(~factor(imc_cat), 
                                           design = subset(mydesign, 
                                                           sexo == sex)))
