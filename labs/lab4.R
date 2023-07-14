@@ -233,73 +233,11 @@ for (col in 1:ncol(df)) {
   
   #col <- 2
   
- median[col] <- (median(df[,col]))
+ medianas[col] <- (median(df[,col]))
   
 }
 
 medianas
-
-# Paquete survey ======================================
-#install.packages("survey") # Recuerda que esto solo se instala una vez!!
-
-library(survey)
-
-# Crear mi identificador
-Antropometria$identifier <- factor(paste0("folio_",
-                                          Antropometria$folio,
-                                          "__intp_",
-                                          Antropometria$intp))
-
-
-table(is.na(Antropometria$pondef))
-
-Antropometria <- Antropometria %>% 
-  drop_na(pondef)
-
-
-Antropometria <- Antropometria %>% 
-  mutate(imc_cat = case_when(imc < 18.5 ~ "Bajo peso",
-                             imc >= 18.5 & imc < 25 ~ "Normal",
-                             imc >= 25 & imc < 30 ~ "Sobrepeso",
-                             imc >= 30  ~ "Obesidad"))
-
-table(Antropometria$imc_cat, exclude = NULL)
-
-
-
-# IMPORTANTE TENER TODAS LAS VARIABLES QUE VOY A USAR 
-# ANTES DE CREAR MI DISENO
-
-mydesign <- svydesign(id = ~ identifier, 
-                      strata = ~est_var, 
-                      weights = ~pondef ,
-                      PSU = ~code_upm, data = Antropometria) 
-options(survey.lonely.psu = "adjust")
-
-# Llamo a la funcion svymean 
-svymean(~peso, design = mydesign)
-
-class(svymean(~peso, design = mydesign))
-
-svymean(~peso, design = mydesign)
-
-confint(svymean(~peso, design = mydesign))
-
-
-# Estimar proporcion en categorias de imc 
-
-svymean(~factor(imc_cat), design = mydesign)
-confint(svymean(~factor(imc_cat), design = mydesign))
-
-# Estimar proporcion en categorias de imc por sexo
-
-# Opcion 1
-svymean(~factor(imc_cat), design = subset(mydesign, sexo == 1))
-confint(svymean(~factor(imc_cat), design = subset(mydesign, sexo == 1)))
-
-# Opcion 2
-svyby(~imc_cat, by = ~sexo, FUN = svymean, design = mydesign,
-      na.rm.all = TRUE)
-
+rbind(df, medianas)
 
 
