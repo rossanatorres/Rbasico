@@ -217,6 +217,8 @@ imctabCILong <- data.frame(imctabCI) %>%
   mutate(sexo = rep(c(1,2), 4))
 
 
+imctabCILong[imctabCILong$sexo ==1, c(2,3)]
+
 imctabHombres <- cbind(imctabfinalWide[,2], imctabCILong[imctabCILong$sexo ==1, c(2,3)])
 imctabMujeres <- cbind(imctabfinalWide[,3], imctabCILong[imctabCILong$sexo ==2, c(2,3)])
 

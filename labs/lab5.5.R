@@ -113,6 +113,8 @@ antro_mini %>%
 antro_mini_svy <- Antropometria %>% 
   select(sexo_lab, imc_cat, identifier, code_upm, pondef, est_var)
 
+# En vez de la base, aplicare la funcion tbl_svysummary  a 
+# mi diseno muestral
 options(survey.lonely.psu = "adjust")
 survey::svydesign(ids = ~identifier,
                   strata=~est_var,
