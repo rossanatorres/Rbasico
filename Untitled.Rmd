@@ -1,50 +1,47 @@
 ---
-title: "PASPE 2023: R básico"
-subtitle: "Tarea 5"
-author: "Rossana Torres Alvarez"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
-output:
-  word_document: default
+title: "HW 5 respuestas"
+author: "Rossana Torres-Alvarez"
+date: "`r Sys.Date()`"
+output: word_document
 ---
 
 ## Pregunta 1. Set up
-1. Carga la base de Antropometría y las librerías haven, tidyverse, survey y gtsummary
-```{r setup, include=TRUE}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
 library(tidyverse)
 library(survey)
 library(haven)
 library(readstata13)
 library(gtsummary)
-knitr::opts_chunk$set(echo = TRUE)
 
 Antropometria <- read_stata("~/Documents/GitHub/Rbasico/files/Antropometria.dta")
 
 ```
 
-2. Remueve las etiquetas de las variables
+## Pregunta 2. Remover las etiquetas
 
-```{r, echo = TRUE}
-
-
-# Remuevo las etiquetas de las variables como en lab5.5
+```{r}
 Antropometria<-haven::zap_labels(Antropometria)
 
 ```
 
-3. Crea la variables $identifier$, $sexo\_lab$, $imc$ e $imc\_cat$ como en el lab5.5.R
-```{r, echo = TRUE}
+## Pregunta 3. 	Crea la variables identifier, sexo_lab, imc e imc_cat como en el lab5.5.R
+
+```{r}
 # Crear mi identificador
 Antropometria$identifier <- factor(paste0("folio_",
                                           Antropometria$folio,
                                           "__intp_",
                                           Antropometria$intp))
-# Crear sexo_lab
+
 Antropometria <- Antropometria %>% 
   mutate(sexo_lab = case_when(sexo == 1~ "Hombre",
                               sexo == 2 ~ "Mujer"))
 
 
-# Crear imc e imc_cat
+
 Antropometria <- Antropometria %>% 
   mutate(imc = peso/(talla/100)^2,
          imc_cat = case_when(imc < 18.5 ~ "Bajo peso",
@@ -60,49 +57,25 @@ Antropometria$imc_cat <- factor(Antropometria$imc_cat,
 
 ```
 
-4. Selecciona las variables: $edad$, $sexo$, $peso$, $talla$, $imc\_cat$ y las variables de diseño de muestra: $identifier$, $code\_upm$, $pondef$, $est\_var$ de la base Antropometría y guardalas en un nuevo dataframe llamado $antro\_mini$. Asegurate de que la variable $pondef$ no tenga valores $NA$
+## Pregunta 4. 	Selecciona las variables: edad, sexo, peso, talla, imc_cat y las variables de diseño de muestra: identifier, code_upm, pondef, est_var de la base Antropometría y guardalas en un nuevo dataframe llamado antro_mini. Asegurate de que la variable pondef no tenga valores NA
 
-```{r, echo = TRUE}
-
-# Selecciono variables que quiero, tiro NAs de ponderador
-antro_mini <- Antropometria %>% 
+```{r}
+antro_mini_svy <- Antropometria %>% 
   select(sexo_lab, imc_cat, identifier, code_upm, pondef, est_var) %>% 
   drop_na(pondef)
-
 ```
 
-5. Intenta recrear la siguiente tabla:
+## Pregunta 5. Intenta recrear la siguiente tabla:
 
-```{r, echo = FALSE, message = FALSE}
+```{r}
 options(survey.lonely.psu = "adjust")
 survey::svydesign(ids = ~identifier,
                   strata=~est_var,
                   weights = ~pondef,
-                  data=antro_mini)%>%
+                  data=antro_mini_svy)%>%
   tbl_svysummary(by = "sexo_lab", 
                  include = c(imc_cat), 
                  label = imc_cat ~ "Categoria de IMC",
                  digits = everything() ~ 1)
-
 ```
-
-
-
-```{r, echo = TRUE, message = FALSE}
-options(survey.lonely.psu = "adjust")
-survey::svydesign(ids = ~identifier,
-                  strata=~est_var,
-                  weights = ~pondef,
-                  data=antro_mini)%>%
-  tbl_svysummary(by = "sexo_lab", 
-                 include = c(imc_cat), 
-                 label = imc_cat ~ "Categoria de IMC",
-                 digits = everything() ~ 1)
-
-```
-
-
-
-
-
 
