@@ -1,5 +1,5 @@
 ---
-title: "PASPE 2023: R básico"
+title: "PASPE 2024: R básico"
 subtitle: "Tarea 2"
 author: "Rossana Torres Alvarez"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
@@ -21,7 +21,7 @@ Antropometria <- read_dta("~/Documents/GitHub/Rbasico/files/Antropometria.dta")
 3. Estima los cuartiles de talla
 4. Estima la talla minima y la talla maxima
 
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 # Llamo a la libreria haven porque se que Antropometria tiene un formato dta
 library(haven)
 
@@ -61,7 +61,7 @@ b) Usando dplyr
 a) Usando base R
 b) Usando dplyr
 6. Guarda un dataframe solo para mujeres y uno solo para hombres, llamalos mujeres_df y hombres_df.
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 # 1. Uso el operador $ y la funcion paste0 para juntar las variables folio e intp
 Antropometria$id <- paste0(Antropometria$folio, Antropometria$intp)
 

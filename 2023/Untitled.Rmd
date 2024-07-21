@@ -1,0 +1,81 @@
+---
+title: "HW 5 respuestas"
+author: "Rossana Torres-Alvarez"
+date: "`r Sys.Date()`"
+output: word_document
+---
+
+## Pregunta 1. Set up
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(survey)
+library(haven)
+library(readstata13)
+library(gtsummary)
+
+Antropometria <- read_stata("~/Documents/GitHub/Rbasico/files/Antropometria.dta")
+
+```
+
+## Pregunta 2. Remover las etiquetas
+
+```{r}
+Antropometria<-haven::zap_labels(Antropometria)
+
+```
+
+## Pregunta 3. 	Crea la variables identifier, sexo_lab, imc e imc_cat como en el lab5.5.R
+
+```{r}
+# Crear mi identificador
+Antropometria$identifier <- factor(paste0("folio_",
+                                          Antropometria$folio,
+                                          "__intp_",
+                                          Antropometria$intp))
+
+Antropometria <- Antropometria %>% 
+  mutate(sexo_lab = case_when(sexo == 1~ "Hombre",
+                              sexo == 2 ~ "Mujer"))
+
+
+
+Antropometria <- Antropometria %>% 
+  mutate(imc = peso/(talla/100)^2,
+         imc_cat = case_when(imc < 18.5 ~ "Bajo peso",
+                             imc >= 18.5 & imc < 25 ~ "Normal",
+                             imc >= 25 & imc < 30 ~ "Sobrepeso",
+                             imc >= 30  ~ "Obesidad"))
+
+Antropometria$imc_cat <- factor(Antropometria$imc_cat,
+                                levels = c("Bajo peso",
+                                           "Normal",
+                                           "Sobrepeso",
+                                           "Obesidad"))
+
+```
+
+## Pregunta 4. 	Selecciona las variables: edad, sexo, peso, talla, imc_cat y las variables de diseño de muestra: identifier, code_upm, pondef, est_var de la base Antropometría y guardalas en un nuevo dataframe llamado antro_mini. Asegurate de que la variable pondef no tenga valores NA
+
+```{r}
+antro_mini_svy <- Antropometria %>% 
+  select(sexo_lab, imc_cat, identifier, code_upm, pondef, est_var) %>% 
+  drop_na(pondef)
+```
+
+## Pregunta 5. Intenta recrear la siguiente tabla:
+
+```{r}
+options(survey.lonely.psu = "adjust")
+survey::svydesign(ids = ~identifier,
+                  strata=~est_var,
+                  weights = ~pondef,
+                  data=antro_mini_svy)%>%
+  tbl_svysummary(by = "sexo_lab", 
+                 include = c(imc_cat), 
+                 label = imc_cat ~ "Categoria de IMC",
+                 digits = everything() ~ 1)
+```
+

@@ -1,0 +1,145 @@
+---
+title: "PASPE 2023: R básico"
+subtitle: "Tarea 2"
+author: "Rossana Torres Alvarez"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  word_document: default
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(haven)
+library(tidyverse)
+Antropometria <- read_dta("~/Documents/GitHub/Rbasico/files/Antropometria.dta")
+```
+
+## Problema 1. Explorar la base Antropometria
+1. Muestra el numero de columnas 
+2. Muestra las primeras 15 observaciones
+3. Estima los cuartiles de talla
+4. Estima la talla minima y la talla maxima
+
+```{r}
+# Llamo a la libreria haven porque se que Antropometria tiene un formato dta
+library(haven)
+
+# Uso la funcion read_dta y pego la direccion local donde tengo la base
+Antropometria <- read_dta("~/Documents/GitHub/Rbasico/files/Antropometria.dta")
+
+# Uso la funcion ncol para observar el numero de columnas
+ncol(Antropometria)
+
+# Uso la funcion head para enseñar las primeras 15 observaciones
+head(Antropometria, 15)
+
+# Uso el operador $ para seleccionar la columna talla y despues aplico
+# la funcion quantile. NOTA utilizo la opcion na.rm = TRUE en caso de que tenga observaciones con NA
+quantile(Antropometria$talla, na.rm = TRUE)
+
+# Uso la funcion max y min para estimar el maximo y minimo de talla
+max(Antropometria$talla, na.rm = TRUE)
+
+min(Antropometria$talla, na.rm = TRUE)
+
+# Opcion 2 uso la funcion summary para obtener un resumen de las estadisticas
+summary(Antropometria$talla)
+```
+
+## Problema 2. Manejo de datos
+1. Crea una nueva variable llamada id, que junte las variables folio e intp
+2. Usa la funcion unique() para contar el numero de ids unicos.
+3. Selecciona las variables sexo, edad, peso y talla
+a) Usando base R
+b) Usando dplyr
+4. Crea una variable llamada imc y estima el indice de masa corporal
+(kg/(mt)^2)
+a) Usando base R
+b) Usando dplyr
+5. Crea una variable con las categorias de imc de la OMS. Apoyate utilizando los criterios usados en la tarea 1.
+a) Usando base R
+b) Usando dplyr
+6. Guarda un dataframe solo para mujeres y uno solo para hombres, llamalos mujeres_df y hombres_df.
+```{r}
+# 1. Uso el operador $ y la funcion paste0 para juntar las variables folio e intp
+Antropometria$id <- paste0(Antropometria$folio, Antropometria$intp)
+
+# 2. Uso la funcion unique() y length() para contar el numero de ids unicos.
+length(unique(Antropometria$id))
+
+# 3. Selecciono las variables sexo, edad, peso y talla. NOTA: Usare la funcion head para que la consola solo imprima las primeras observaciones como demostracion de la respuesta
+
+# a) Usando base R
+head(Antropometria[, c("sexo", "edad", "peso", "talla")], 3)
+
+# b) Usando dplyr
+# LLAMO A LA LIBRERIA TIDYVERSE AL INICIO DE MI SCRIPT
+library(tidyverse)
+head(select(Antropometria, "sexo", "edad", "peso", "talla"), 3)
+
+# 4. Creo una variable llamada imc y estima el indice de masa corporal
+# (kg/(mt)^2). NOTA: Usare la funcion head para que la consola solo imprima las primeras observaciones como demostracion de la respuesta
+
+# a) Usando base R
+Antropometria$imc <- Antropometria$peso/(Antropometria$talla/100)^2
+head(Antropometria$imc,3)
+
+# b) Usando dplyr
+
+Antropometria <- mutate(Antropometria, imc = peso/(talla/100)^2)
+head(Antropometria$imc,3)
+
+# 5. Creo una variable con las categorias de imc de la OMS utilizando los criterios usados en la tarea 1.
+
+# a) Usando base R
+Antropometria$imc_cat <- rep(NA, nrow(Antropometria))
+Antropometria$imc_cat[Antropometria$imc < 18] <- "Bajo peso"
+Antropometria$imc_cat[Antropometria$imc >= 18 & Antropometria$imc <= 24.9] <- "Peso normal"
+Antropometria$imc_cat[Antropometria$imc > 24.9 & Antropometria$imc <= 29.9] <- "Sobrepeso"
+Antropometria$imc_cat[Antropometria$imc > 29.9 & Antropometria$imc <= 34.5] <-  "Obesidad grado I"
+Antropometria$imc_cat[Antropometria$imc > 34.5 & Antropometria$imc <= 39.9] <-  "Obesidad grado II"
+Antropometria$imc_cat[Antropometria$imc > 39.9] <-  "Obesidad grado III"
+
+# Verifico usando funcion table y la opcion exclude = NULL para ver observaciones que no cayeron en ninguna categoria (es decir NAs)
+
+table(Antropometria$imc_cat, exclude = NULL)
+
+# b) Usando dplyr
+
+Antropometria <- Antropometria %>% 
+                 mutate(imc_cat = case_when(imc < 18 ~ "Bajo peso",
+                                            imc >= 18 & imc <= 24.9 ~ "Peso normal",
+                                            imc> 24.9 & imc <= 29.9 ~ "Sobrepeso",
+                                            imc > 29.9 & imc <= 34.5 ~ "Obesidad grado I",
+                                            imc > 34.5 & imc <= 39.9 ~ "Obesidad grado II",
+                                            imc > 39.9 ~ "Obesidad grado III"))
+
+# Verifico
+
+table(Antropometria$imc_cat, exclude = NULL)
+
+# Extra, ver quienes no tienen categoria
+
+sinimc <- filter(Antropometria, is.na(imc))
+
+sinimc[, c("peso","talla","imc", "imc_cat")]
+
+# Concluyo que son los individuos sin datos completos
+
+# 6. Guarda un dataframe solo para mujeres y uno solo para hombres, llamalos mujeres_df y hombres_df.
+
+mujeres_df <- filter(Antropometria, sexo == 2)
+
+# Verifico
+table(mujeres_df$sexo, exclude = NULL)
+
+hombres_df <- filter(Antropometria, sexo == 1)
+
+# Verifico
+table(hombres_df$sexo, exclude = NULL)
+
+
+
+```
+

@@ -1,0 +1,63 @@
+---
+title: "PASPE 2023: R básico"
+subtitle: "Tarea 3"
+author: "Rossana Torres Alvarez"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  word_document: default
+---
+
+
+```{r setup, include=FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Graficas
+Corre las siguientes lineas de codigo
+```{r,message=FALSE}
+library(tidyverse)
+head(mpg)
+```
+Lo que observas es un resumen del dataframe **mpg**, que ontiene observaciones recopiladas por la Agencia de Protección Ambiental de EE. UU. sobre 38 modelos de automóviles. Para aprender mas sobre esta base corre la siguiente linea
+```{r, eval = FALSE}
+?mpg
+
+```
+Podras leer el significado de cada variable
+
+## Preguntas
+
+1. Crea una grafica que en el eje x contenga la variable **displ** (tamaño de motor) y en el eje y la variable **hwy** (eficiencia del combustible).
+
+```{r, echo=TRUE, warning=FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+
+```
+
+2. Crea una grafica que en el eje x contenga la variable **displ** (tamaño de motor) y en el eje y la variable **hwy** (eficiencia del combustible) usando la variable **class** (modelo de automóvil) para colorear los puntos. 
+
+```{r, echo=TRUE, warning=FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = class))
+
+```
+
+3. Repite la grafica anterior, solo que ahora cambia el tamaño de los puntos de acuerdo al modelo de automóvil (Hint: usa size dentro de aes()). 
+
+```{r, echo=TRUE, warning=FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, size = class))
+
+```
+
+4. El gráfico muestra una relación negativa entre el tamaño del motor (**displ**) y la eficiencia del combustible (**hwy**). Añade una capa extra a la grafica de la pregunta 1, utilizando geom\_smooth(). Esencialmente, geom\_smooth() agrega una línea de tendencia sobre un gráfico existente. Apoyate en google o en la pestaña de ayuda de RStudio para utilizar la funcion correctamente. 
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  geom_smooth(mapping = aes(x = displ, y = hwy))
+
+```
+

@@ -1,0 +1,337 @@
+---
+title: "Curso R básico"
+author: "Rossana Torres Alvarez"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(downloadthis)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Notas de clase
+
+## Clase 1. Introducción a R, R Studio y conceptos básicos de programación en R
+
+*	Ventajas de usar R
+*	Interfaces gráficas disponibles
+*	Introducción al lenguaje de programación
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/slides/clase1.pdf",
+  button_label = "Descargar clase1.pdf",
+  button_type = "primary",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/lab1.R",
+  button_label = "Descargar lab1.R",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw1.docx",
+  button_label = "Descargar tarea1.R",
+  button_type = "warning",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+## Clase 2.	Importación/exportación/manejo de datos
+
+*	Cómo importar/exportar datos
+*	Introducción al uso de paqueterías
+*	Introducción a tidyverse
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/slides/clase2.pdf",
+  button_label = "Descargar clase2.pdf",
+  button_type = "primary",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/lab2.R",
+  button_label = "Descargar lab2.R",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw2.docx",
+  button_label = "Descargar tarea2.docx",
+  button_type = "warning",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+## Clase 3.	Introducción a tidyverse (continuación) y creación de gráficos 
+
+*	Tutorial del uso de ggplot y otros paquetes de graficación
+
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/slides/clase3.pdf",
+  button_label = "Descargar clase3.pdf",
+  button_type = "primary",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/lab2.5.R",
+  button_label = "Descargar lab2.5.R",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/lab3.R",
+  button_label = "Descargar lab3.R",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw3.docx",
+  button_label = "Descargar tarea3.docx",
+  button_type = "warning",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+## Clase 4
+
+* Funciones y for loops
+* Introducción a paquete survey
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/slides/clase4.pdf",
+  button_label = "Descargar clase4.pdf",
+  button_type = "primary",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/lab4.R",
+  button_label = "Descargar lab4.R",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw4.docx",
+  button_label = "Descargar tarea4.docx",
+  button_type = "warning",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+## Clase 5
+
+* Funciones y for loops (continuación)
+* Introducción a paquete survey (continuación)
+* Introducción a paquete gtsummary
+* Introducción a R Markdown
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/slides/clase5.pdf",
+  button_label = "Descargar clase5.pdf",
+  button_type = "primary",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/lab5.R",
+  button_label = "Descargar lab5.R",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/labs/lab5.5.R",
+  button_label = "Descargar lab5.5.R",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw5.docx",
+  button_label = "Descargar tarea5.docx",
+  button_type = "warning",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+
+
+
+
+
+
+# Archivos
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/files/Antropometria.dta",
+  button_label = "Descargar Antropometria.dta",
+  button_type = "primary",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/files/ffq_long.csv",
+  button_label = "Descargar ffq_long.csv",
+  button_type = "primary",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+# Respuestas de tareas
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw1.docx",
+  button_label = "Descargar tarea1.docx",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw2.docx",
+  button_label = "Descargar tarea2.docx",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw3.docx",
+  button_label = "Descargar tarea3.docx",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw4.docx",
+  button_label = "Descargar tarea4.docx",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw5.docx",
+  button_label = "Descargar tarea5.docx",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+
