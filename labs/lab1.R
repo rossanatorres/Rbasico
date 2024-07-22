@@ -1,12 +1,15 @@
 
+rm(list=ls())
+# Clase 1. R Basico !!!!!!!!!!!!!
 # Definir variables =====================================================
 
 #  X es el valor asignado a x
 # escoger un nombre adecuado
 
 val1 <- 1
+
 # el simbolo <- es equivalente a = 
-val1 = 2 
+val2 = 2 
 
 # Reescribir variable
 # cuidado!!!
@@ -35,13 +38,14 @@ val2
 
 # opcion 2
 (val2 <- 2) # cuidado si no cerramos nos sale error
-#(val2 <- 2 usar esc para evitar quedarnos atorados en el codigo
+#(val2 <- 2 #usar esc para evitar quedarnos atorados en el codigo
 
 # opcion 3
 print(val2)
 
 
 # Hacer operaciones aritmeticas
+val1 + val2
 
 val3 <- val1 + val2
 
@@ -129,7 +133,7 @@ apellidos <- c("Torres", "Alvarez")
 
 # operacion (?) con caracteres
 
-nombres <- paste0(perritos, " ",apellidos)
+nombres <- paste0(perritos," ",apellidos, perritos)
 
 resultado <- c(nombres, apellidos)
 
@@ -150,8 +154,8 @@ z[1:3] #
 
 # Matrices ===============================================================
 
-mimatriz <- matrix(1, nrow = 4, ncol = 3)
-
+mimatriz <- matrix(data = 1, nrow = 4, ncol = 3)
+mimatriz
 
 # Accesar elementos
 # estructura: matrix[filas,columnas]
@@ -208,6 +212,9 @@ df[, 1]
 df[c(1, 2, 3), ] # Seleccionar mas de una fila
 df[1:3, ] # Seleccionar mas de una fila
 
+
+#df[c("columna1", "columna2"), ]
+
 # pregunta que quiero contestar
 df[, 1] > 2
 
@@ -225,20 +232,19 @@ df[df[, 1] > 2, ] # Operacion logica en fila
 sum(df[, 1], na.rm = T)
 sum(x)
 
+missings = c(1, 2, NA, NA)
+sum(missings, na.rm = TRUE)
 
 # Reasignar valores
-df
+
 df[3, 2] # un elemento: fil 3 columna 2
 df[3, 2] <- 5 
 df[3, 2] <- c(5,2) # Para reasignar me tengo que fijar en la dimension!!!!
 dim(df[3, ])
 df[3, ] <- c(1,1,1) # Reasignar con misma dimension
 
-
-
-
-df
-
+df$prueba_logica <- rep(NA, nrow(df))
+df$prueba_logica <- df[, 1] > 2
 
 # Ordenar valores de columnas
 
@@ -253,7 +259,10 @@ micaracter <- sort(micaracter, decreasing = T)
 micaracter
 
 # Crear factor para ordenar jerarquicamente 
-mifactor <- factor(micaracter, levels = c("Bajo", "Medio", "Alto", "Muy alto"))
+mifactor <- factor(micaracter, levels = c("Bajo", 
+                                          "Medio", 
+                                          "Alto", 
+                                          "Muy alto"))
 class(mifactor)
 
 df
@@ -261,7 +270,7 @@ df2 <- cbind.data.frame(df, "columna4" = mifactor)
 df2
 
 row <- data.frame("columna1"=1, "columna2"=1, "columna3"=1)
-df3 <- rbind.data.frame(df, row)
+df3 <- rbind.data.frame(df[,1:3], row)
 
 # Ojo: mismo numero de filas entre columnas
 df4 <- rbind.data.frame(df2, row)
