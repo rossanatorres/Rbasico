@@ -5,12 +5,12 @@ rm(list=ls())
 library(tidyverse) # llamar paquete
 #library(survey) #llamar paquete
 library(rio)
-#library(readxl)
-# library(haven)
+library(readxl)
+library(haven)
 
 
 # Donde yo tengo los archivos que estare usando
-#setwd(path = "~/Documents/GitHub/Rbasico")
+setwd("~/Documents/GitHub/Rbasico")
 
 # Verificar
 getwd() 
@@ -24,16 +24,16 @@ getwd()
 # data <- read_excel("files/out_agecat_reclassifed1_weighted_2021.xlsx")
 # 
 # #Leer libro de excel
-# data_list <- import_list("files/out_agecat_reclassifed1_weighted_2021.xlsx", setclass = "tbl")
+data_list <- import_list("files/out_agecat_reclassifed1_weighted_2021.xlsx", setclass = "tbl")
 # data_list[[1]] #seleccionar primera hoja de calculo
 # data_list$agecat_1 #seleccionar primera hoja de calculo
 
 
 # Leer dta
 # Yo tengo guardada la base aqui:
-#Antropometria <- read_dta("files/Antropometria.dta")
+Antropometria <- read_dta("files/Antropometria.dta")
 
-Antropometria <- read_dta("tus carpeta/Antropometria.dta")
+#Antropometria <- read_dta("tu carpeta/Antropometria.dta")
 
 
 class(Antropometria)  
@@ -48,7 +48,8 @@ length(Antropometria$folio) # examinar una columna
 
 class(Antropometria$sexo)
 # numerico a categorico
-#Antropometria$sexo <- as.character(Antropometria$sexo) # cambiar a caracter
+Antropometria$sexo_char <- rep(NA, nrow(Antropometria))
+Antropometria$sexo_char <- as.character(Antropometria$sexo) # cambiar a caracter
 # Usar factor
 # Ordenando y etiquetando 
 Antropometria$sexo_fac <- factor(Antropometria$sexo, 
@@ -74,6 +75,7 @@ table(Antropometria$sexo)
 table(Antropometria$edad)
 table(Antropometria$sexo, exclude = NULL) # tambien categoria de missings
 
+is.na(Antropometria$sexo)
 table(is.na(Antropometria$sexo)) # checar missings
 
 
@@ -106,7 +108,7 @@ peso60 <- Antropometria[which(Antropometria$peso > 60),]
 #Nota: Podemos usar mas de una operacion logica
 #condicion1 & condicion2
 # & significa que debe cumplir todas las condiciones
-# | significa que puede cumplir cualquiera de las dos condiciones
+## | significa que puede cumplir cualquiera de las dos condiciones
 #condicion1 | condicion2
 pesoedad60 <- Antropometria[which(Antropometria$peso > 60 & Antropometria$edad >60),]
 Antropometria[which(Antropometria$peso > 60 | Antropometria$edad >60),]
@@ -116,8 +118,8 @@ Antropometria$mi_imc <- Antropometria$peso/(Antropometria$talla/100)^2
 
 
 # Inicializar una variable vacia
-Antropometria$sexo_lab <- NA #otra opcion que no recomiendo
-Antropometria$sexo_lab <- rep(NA, nrow(Antropometria))
+Antropometria$sexo_lab <- NA #otra opcion (que no recomiendo)
+Antropometria$sexo_lab <- rep(NA, nrow(Antropometria)) # esta opcion si recomiendo
 
 # Reescribir variable anterior en funcion a otra columna (sexo)
 Antropometria$sexo_lab[Antropometria$sexo == 1] <- "Hombre"
@@ -141,13 +143,13 @@ Antropometria$edad_cat <- rep(NA, nrow(Antropometria))
 table(Antropometria$edad_cat, exclude = NULL)
 # Reescribir variable anterior en funcion a otra columna (edad)
 
-Antropometria$edad_cat[Antropometria$edad<30] <- "20’s"
+Antropometria$edad_cat[Antropometria$edad<30] <- "0-20’s"
 Antropometria$edad_cat[Antropometria$edad>=30 & Antropometria$edad<40] <- "30’s"
 Antropometria$edad_cat[Antropometria$edad>=40 & Antropometria$edad<50] <- "40’s"
 Antropometria$edad_cat[Antropometria$edad>=50 & Antropometria$edad<60] <- "50’s"
 Antropometria$edad_cat[Antropometria$edad>=60 & Antropometria$edad<70] <- "60’s"
 Antropometria$edad_cat[Antropometria$edad>=70 & Antropometria$edad<80] <- "70’s"
-Antropometria$edad_cat[Antropometria$edad>=80] <- "80’s"
+Antropometria$edad_cat[Antropometria$edad>=80] <- "80’s +"
 
 # Verificar
 table(Antropometria$edad_cat, exclude = NULL)
@@ -171,7 +173,7 @@ max(x)
 # Seleccionar solo las columnas que me interesan
 
 mini_antro2 <- select(Antropometria, peso, talla)
-mini_antro <- Antropometria[, c(peso, talla)] #equivalente
+mini_antro <- Antropometria[, c("peso", "talla")] #equivalente
 
 # con pipes
 mini_antro_pipes <- Antropometria %>% select(peso, talla)
@@ -188,35 +190,38 @@ peso60_pipes <- Antropometria %>% dplyr::filter(peso > 60)
 
 #Nota: Podemos usar mas de una operacion logica
 # & significa que debe cumplir todas las condiciones
-# | significa que puede cumplir cualquiera de las dos condiciones
+## | significa que puede cumplir cualquiera de las dos condiciones
 pesoedad60 <- filter(Antropometria, peso > 60 & edad >60)
 pesoedad60 <- filter(Antropometria, peso > 60, edad >60) #equivalente
+# es equivalente a
+pesoedad60 <- Antropometria[Antropometria$peso > 60 & Antropometria$edad >60, ]
 
 apesoedad60 <- filter(Antropometria, peso > 60 | edad >60) # al menos una
 
-peso60 <- Antropometria[Antropometria$peso > 60, ]
 
 
 # Crear una nueva variable
 
-# Base                   # nueva columna
+# Con base R
+# Inicializar una variable vacia
+Antropometria$tres <- rep(3, nrow(Antropometria))
+Antropometria$tres <- 3
+
+
+# Base de datos         # nueva columna
 Antropometria <- dplyr::mutate(Antropometria, dos = 2)
 
 # con pipes
 Antropometria <- Antropometria %>% dplyr::mutate(uno = 1)
 
-Antropometria$tres <- rep(3, nrow(Antropometria))
-Antropometria$tres <- 3
-
- 
-# Inicializar una variable vacia
+# Crear una nueva variable en funcion a otras
 Antropometria <- mutate(Antropometria, mi_imc = peso/((talla)/100)^2)
 Antropometria$mi_imc <- Antropometria$peso/(Antropometria$talla/100)^2
 
 # con pipes
 Antropometria <- Antropometria %>% mutate(mi_imc2 = peso/((talla)/100)^2)
 
-# Reescribir variable anterior en funcion a otra columna (sexo)
+# Nueva variable en funcion a otra columna (sexo)
 
 # Funcion case_when
 Antropometria <- mutate(Antropometria, 
@@ -226,14 +231,14 @@ Antropometria <- mutate(Antropometria,
 Antropometria$sexo_lab <- ifelse(Antropometria$sexo == 1, "Hombre",
                                  "Mujer")
 
-# Podemos usarlo para mas de una categoria
+# Podemos usar case_when para mas de una categoria
 Antropometria <- mutate(Antropometria, 
-                        edad_cat = case_when(edad < 20 ~ "20s",
+                        edad_cat = case_when(edad < 20 ~ "0-20s",
                                              edad >= 20 & edad <50 ~ "Adultez",
                                              edad >= 50 ~ "50+"))
 
 Antropometria <- Antropometria %>% 
-                    mutate(edad_cat_pipe = case_when(edad < 20 ~ "20s",
+                    mutate(edad_cat_pipe = case_when(edad < 20 ~ "0-20s",
                                              edad >= 20 & edad <50 ~ "Adultez",
                                              edad >= 50 ~ "50+"))
 
@@ -247,8 +252,9 @@ table(Antropometria$edad_cat_pipe, exclude = NULL)
 
 
 # Exportar datos ======================================
-# save
+# write
 write_dta(mini_antro_pipes, "~/Documents/GitHub/Rbasico/mini_antro.dta")
 write_csv(mini_antro_pipes, "~/Documents/GitHub/Rbasico/mini_antro.csv")
+# save
 save(mini_antro_pipes, file = "~/Documents/GitHub/Rbasico/mini_antro.rda")
-# write
+
