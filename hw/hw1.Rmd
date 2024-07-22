@@ -47,10 +47,12 @@ que se encuentra en el rango de peso bajo (i.e imc $<$ 18 )?
 ```{r, eval=FALSE, echo=FALSE}
 # Uso una operacion logica
 imc < 18
-```
-No, el imc se encuentra en el rango de peso normal
 
-5 Crea un vector que contenga al vector kg, mt y bmi
+# No, el imc se encuentra en el rango de peso normal
+
+```
+
+5. Crea un vector que contenga al vector kg, mt y imc
 
 ```{r, eval=FALSE, echo=FALSE}
 antrop <- c(kg, mt, imc)
@@ -74,9 +76,11 @@ mivector1 = c(1:100)
 mivector1 = (101:200)
 mivector3 = c(mivector1, mivector2)
 # Leo el error que me arroja la consola:
+
+# Mi vector1 se reescribio porque no cambie el nombre y como consecuencia mivector3 no puede ser creado
+
 ```
 
-Mi vector1 se reescribio porque no cambie el nombre y como consecuencia mivector3 no puede ser creado
 
 ## Problema 2. Vectores, dataframes y listas
 
