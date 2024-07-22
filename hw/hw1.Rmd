@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 1. Covierte  155 libras a kg (1 libra = 0.453592 kg) y guardalo en una variable llamada kg
 
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 # Uso operaciones con objetos
 kg <- 155*0.453592
 
@@ -25,7 +25,7 @@ print(kg)
 ```
 
 2. Convierte 160 cm a metros (100 cm = 1 mt) y guardalo en una variable llamada mt 
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 mt <- 160/100
 print(mt)
 ```
@@ -33,7 +33,7 @@ print(mt)
 3. Estima el indice de masa corporal (kg/(mt)^2) usando la respuesta de 1 y 2 y 
 guardalo en una variable llamada imc
 
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 # Llamo a los objetos que cree previamente
 imc <- kg/mt^2
 print(imc)
@@ -44,17 +44,17 @@ print(imc)
 
 que se encuentra en el rango de peso bajo (i.e imc $<$ 18 )? 
 
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 # Uso una operacion logica
 imc < 18
 
-# No, el imc se encuentra en el rango de peso normal
 
 ```
+No, el imc se encuentra en el rango de peso normal
 
 5. Crea un vector que contenga al vector kg, mt y imc
 
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 antrop <- c(kg, mt, imc)
 print(antrop)
 ```
@@ -63,7 +63,7 @@ print(antrop)
 6. Crea un vector que muestre la siguiente frase: El individuo tiene un imc de 
 (tu respuesta en 3). Hint : junta texto con el vector imc
 
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 # Uso la funcion paste0 para juntar texto con el otro vector que cree previamente
 frase <- paste0("El individuo tiene un imc de: ", imc)
 print(frase)
@@ -71,23 +71,37 @@ print(frase)
 
 
 7. Copia la siguiente linea y correla en RStudio, que observas? Si hay algun error, intenta resolverlo
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 mivector1 = c(1:100)
 mivector1 = (101:200)
 mivector3 = c(mivector1, mivector2)
-# Leo el error que me arroja la consola:
 
-# Mi vector1 se reescribio porque no cambie el nombre y como consecuencia mivector3 no puede ser creado
+# Leo el error que me arroja la consola:
+# Error:
+#! object 'mivector2' not found
+
+
+
 
 ```
+Mi vector2 no existe porque vector1 se reescribio porque no cambie el nombre y como consecuencia mivector3 no puede ser creado. Corregido:
 
+```{r}
+mivector1 = c(1:100)
+mivector2 = (101:200)
+mivector3 = c(mivector1, mivector2)
+```
 
 ## Problema 2. Vectores, dataframes y listas
 
 1. Crea un vector con los nombres de las categorias de imc segun la OMS (Bajo peso, Peso normal, Sobrepeso,
 Obesidad grado I, Obesidad grado II, Obesidad grado III) y llamalo cat_names
 
-```{r, eval=FALSE, echo=FALSE}
+```{r}
+
+
+
+
 cat_names <- c("Bajo peso", "Peso normal", "Sobrepeso",
 "Obesidad grado I", "Obesidad grado II", "Obesidad grado III")
 print(cat_names)
@@ -96,7 +110,7 @@ print(cat_names)
 
 2. Muestra unicamente las categorias de obesidad  del vector que creaste
 
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 # Utilizo corchetes cuadrados y la funcion length para seleccionar los valores que quiero
 print(cat_names[4:length(cat_names)])
 ```
@@ -106,7 +120,7 @@ print(cat_names[4:length(cat_names)])
 (< 18, 18.5-24.9, 25-29.9, 30-34.5, 35-39.9, > 40) y 
 llamalo cat. Muestra tu vector y determina la clase del objeto
 
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 cat <- c("< 18", "18.5-24.9", "25-29.9", "30-34.5", "35-39.9", "> 40")
 print(cat)
 # Utilizo la funcion class para determinar la clase de objeto
@@ -116,7 +130,7 @@ class(cat)
 
 4. Crea un dataframe llamado imc_df usando los vectores cat_names y cat. Nombra las columnas como names y cat.
 
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 # Utilizo la funcion data.frame para crear mi dataframe a partir de vectores que cree previamente
 imc_df <- data.frame(cat_names, cat)
 
@@ -126,14 +140,14 @@ colnames(imc_df) <- c("names", "cat")
 
 
 5. Muestra unicamente las categorias de obesidad  del dataframe que creaste
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 # Utilizo corchetes cuadrados para seleccionar filas, dejo vacio para seleccionar todas las columnas 
 imc_df[4:nrow(imc_df), ]
 ```
 
 
 6. Accede a la columna cat
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 #Opcion 1. Accedo usando corchetes cuadrados
 imc_df[,"cat"]
 #Opcion 2. Acceso utilizando el operador $
@@ -142,14 +156,15 @@ imc_df$cat
 
 
 7. Crea una lista que contenga el vector kg, el vector, imc y el dataframe imc_df
-```{r, eval=FALSE, echo=FALSE}
+```{r}
 milista <- list(kg, imc, imc_df)
 ```
 
 
 8. Accede a la columna cat dentro de la lista
-```{r, eval=FALSE, echo=FALSE}
-# Opcion1. Accedo al imc_df que es el tercer objeto y a la columna cat
+```{r}
+# Opcion1. Accedo al imc_df que es el tercer objeto y a la columna cat (que es la columna 2 del data.frame)
+milista[[3]][2]
 milista[[3]]["cat"]
 
 # Opcion 2. Nombro los objetos de la lista
