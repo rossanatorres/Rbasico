@@ -44,7 +44,7 @@ download_link(
 ```{r, echo=FALSE}
 download_link(
   link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw1.docx",
-  button_label = "Descargar tarea1.R",
+  button_label = "Descargar tarea1.docx",
   button_type = "warning",
   has_icon = TRUE,
   icon = "fa fa-save",

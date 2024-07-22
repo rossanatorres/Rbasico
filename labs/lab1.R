@@ -5,12 +5,14 @@
 # escoger un nombre adecuado
 
 val1 <- 1
-val1 = 2 # equivalente
+# el simbolo <- es equivalente a = 
+val1 = 2 
+
+# Reescribir variable
+# cuidado!!!
 
 # Variable vacia
 vacia <- NA
-
-class(vacia)
 
 # Valor logico
 
@@ -19,12 +21,11 @@ logico <- FALSE
 logico <- T
 logico <- F
 
-# Reescribir variable
-# cuidado!!!
-
 
 # Funcion class
-
+class(val1)
+class(logico)
+class(vacia)
 
 # Ver que hay dentro de variable
 
@@ -96,6 +97,7 @@ x
 y <- rep(x = 7, times = 4) # Crear un vector que con tiene 4 7s
 y
 
+# Usar ayuda para mas informacion
 
 # Secuencias
 a <- seq(from = 10, to = 23, by = 1) # contar de 10 to a cada 1 unidad
@@ -111,6 +113,9 @@ d
 # Vector vacio
 vec_vacio <- c()
 
+vec_vacio
+
+class(vec_vacio)
 
 # 2. Caracteres 
 
@@ -126,15 +131,17 @@ apellidos <- c("Torres", "Alvarez")
 
 nombres <- paste0(perritos, " ",apellidos)
 
-resultado <- c(nombres, mivector)
+resultado <- c(nombres, apellidos)
 
 
 # Indexar vectores 
 
 z <- x + y
+z
 
 length(z)# parentesis redondos son para funciones
 
+z
 z[3] # parentesis cuadrados son para indices
 z[2]
 z[1:3] # 
@@ -204,6 +211,8 @@ df[1:3, ] # Seleccionar mas de una fila
 # pregunta que quiero contestar
 df[, 1] > 2
 
+df
+
 df[df[, 1] > 2, ] # Operacion logica en fila
 
 # Que notan?
@@ -239,17 +248,29 @@ sort(x, decreasing = T) # cambiar default
 rev(x)
 
 micaracter <- c("Bajo", "Medio", "Alto", "Muy alto")
-
+micaracter
 micaracter <- sort(micaracter, decreasing = T)
+micaracter
 
 # Crear factor para ordenar jerarquicamente 
 mifactor <- factor(micaracter, levels = c("Bajo", "Medio", "Alto", "Muy alto"))
 class(mifactor)
 
+df
 df2 <- cbind.data.frame(df, "columna4" = mifactor)
-row <- data.frame("columna1"=1, "columna2"=1, "columna3"=1, "columna4" =1)
+df2
+
+row <- data.frame("columna1"=1, "columna2"=1, "columna3"=1)
 df3 <- rbind.data.frame(df, row)
 
+# Ojo: mismo numero de filas entre columnas
+df4 <- rbind.data.frame(df2, row)
+
+row <- data.frame("columna1"=1, "columna2"=1, "columna3"=1, "columna4" = 1)
+df4 <- rbind.data.frame(df2, row)
+
+row <- data.frame("columna1"=1, "columna2"=1, "columna3"=1, "columna4" = "Alto")
+df4 <- rbind.data.frame(df2, row)
 
 # Crear listas =============================================================
 # Arreglo de objetos de cualquier tamano
