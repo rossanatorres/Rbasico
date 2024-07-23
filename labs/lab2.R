@@ -7,10 +7,13 @@ library(tidyverse) # llamar paquete
 library(rio)
 library(readxl)
 library(haven)
-
+#install.packages("haven") 
 
 # Donde yo tengo los archivos que estare usando
 setwd("~/Documents/GitHub/Rbasico")
+# Alternativa:
+# Si ya tengo un R script guardado en una carpeta que quiero usar
+# Session/Set working directory/ to source file location
 
 # Verificar
 getwd() 
@@ -22,11 +25,12 @@ getwd()
 # # SOLO PARA DEMOSTRACION NO CORRER
 # # Leer csv
 # data <- read_excel("files/out_agecat_reclassifed1_weighted_2021.xlsx")
-# 
+
 # #Leer libro de excel
-data_list <- import_list("files/out_agecat_reclassifed1_weighted_2021.xlsx", setclass = "tbl")
-# data_list[[1]] #seleccionar primera hoja de calculo
-# data_list$agecat_1 #seleccionar primera hoja de calculo
+# data_list <- import_list("files/out_agecat_reclassifed1_weighted_2021.xlsx", 
+#                          setclass = "data.frame")
+# age_cat1 = data_list[[1]] #seleccionar primera hoja de calculo
+# age_cat1 = data_list$agecat_1 #seleccionar primera hoja de calculo
 
 
 # Leer dta
@@ -38,18 +42,21 @@ Antropometria <- read_dta("files/Antropometria.dta")
 
 class(Antropometria)  
 dim(Antropometria)  #ver dimension de dataframe
-names(Antropometria) #ver variables que tengo en dataframe
+colnames(Antropometria) #ver variables que tengo en dataframe
 nrow(Antropometria)  #ver cuantas filas
 ncol(Antropometria)   # ver cuantas columnas hay
 head(Antropometria, n = 10)  #ver los primeros 10 datos
 tail(Antropometria, n = 10)  # ver los ultimos 10 datos
 length(Antropometria$folio) # examinar una columna
 
+glimpse(Antropometria)
 
 class(Antropometria$sexo)
 # numerico a categorico
 Antropometria$sexo_char <- rep(NA, nrow(Antropometria))
 Antropometria$sexo_char <- as.character(Antropometria$sexo) # cambiar a caracter
+class(Antropometria$sexo_char)
+
 # Usar factor
 # Ordenando y etiquetando 
 Antropometria$sexo_fac <- factor(Antropometria$sexo, 
@@ -105,6 +112,9 @@ Antropometria[which(Antropometria$peso > 60),]
 # Paso 3. Si lo deseo guardar nuestro resultado
 peso60 <- Antropometria[which(Antropometria$peso > 60),]
 
+
+summary(peso60$peso)
+
 #Nota: Podemos usar mas de una operacion logica
 #condicion1 & condicion2
 # & significa que debe cumplir todas las condiciones
@@ -125,11 +135,27 @@ Antropometria$sexo_lab <- rep(NA, nrow(Antropometria)) # esta opcion si recomien
 Antropometria$sexo_lab[Antropometria$sexo == 1] <- "Hombre"
 Antropometria$sexo_lab[Antropometria$sexo == 2] <- "Mujer"
 
+#Para checar 
+# Visualmente
+data_sexo <- Antropometria[,c("sexo", "sexo_lab")]
+
+#Contando en base grande
+table(Antropometria$sexo, exclude = NULL)
+table(Antropometria$sexo_lab, exclude = NULL)
+
 # Funcion ifelse (equivalente a lo de arriba)
 Antropometria$sexo_lab <- rep(NA, nrow(Antropometria))
 
-Antropometria$sexo_lab <- ifelse(Antropometria$sexo == 1, "Hombre",
-                                 "Mujer")
+Antropometria$sexo_lab <- ifelse(test = Antropometria$sexo == 1, yes = "Hombre",
+                                 no ="Mujer")
+
+
+# Visualmente
+data_sexo <- Antropometria[,c("sexo", "sexo_lab")]
+
+#Contando en base grande
+table(Antropometria$sexo, exclude = NULL)
+table(Antropometria$sexo_lab, exclude = NULL)
 
 # Problema cuando tenemos mas de una categoria pues tenemos que hacer
 # ifelse anidados (posible pero que flojera)
@@ -140,9 +166,9 @@ Antropometria$sexo_lab <- ifelse(Antropometria$sexo == 1, "Hombre",
 
 Antropometria$edad_cat <- rep(NA, nrow(Antropometria))
 #Antropometria$edad_cat <- NA # es equivalente
-table(Antropometria$edad_cat, exclude = NULL)
-# Reescribir variable anterior en funcion a otra columna (edad)
+table(Antropometria$edad_cat, exclude = NULL) # Visualmente
 
+# Reescribir variable anterior en funcion a otra columna (edad)
 Antropometria$edad_cat[Antropometria$edad<30] <- "0-20’s"
 Antropometria$edad_cat[Antropometria$edad>=30 & Antropometria$edad<40] <- "30’s"
 Antropometria$edad_cat[Antropometria$edad>=40 & Antropometria$edad<50] <- "40’s"
@@ -186,7 +212,10 @@ peso60 <- Antropometria[Antropometria$peso > 60, ]
 
 
 # con pipes
-peso60_pipes <- Antropometria %>% dplyr::filter(peso > 60)
+
+#dplyr::filter llamar funcion de paquete
+
+peso60_pipes <- Antropometria %>% filter(peso > 60)
 
 #Nota: Podemos usar mas de una operacion logica
 # & significa que debe cumplir todas las condiciones
@@ -204,15 +233,15 @@ apesoedad60 <- filter(Antropometria, peso > 60 | edad >60) # al menos una
 
 # Con base R
 # Inicializar una variable vacia
-Antropometria$tres <- rep(3, nrow(Antropometria))
+Antropometria$tres <- rep(NA, nrow(Antropometria))
 Antropometria$tres <- 3
 
 
 # Base de datos         # nueva columna
-Antropometria <- dplyr::mutate(Antropometria, dos = 2)
+Antropometria <- mutate(Antropometria, dos = 2)
 
 # con pipes
-Antropometria <- Antropometria %>% dplyr::mutate(uno = 1)
+Antropometria <- Antropometria %>% mutate(uno = 1)
 
 # Crear una nueva variable en funcion a otras
 Antropometria <- mutate(Antropometria, mi_imc = peso/((talla)/100)^2)
@@ -233,7 +262,7 @@ Antropometria$sexo_lab <- ifelse(Antropometria$sexo == 1, "Hombre",
 
 # Podemos usar case_when para mas de una categoria
 Antropometria <- mutate(Antropometria, 
-                        edad_cat = case_when(edad < 20 ~ "0-20s",
+                        edad_cat2 = case_when(edad < 20 ~ "0-20s",
                                              edad >= 20 & edad <50 ~ "Adultez",
                                              edad >= 50 ~ "50+"))
 
@@ -245,7 +274,7 @@ Antropometria <- Antropometria %>%
 
 # Verificar
 
-table(Antropometria$edad_cat, exclude = NULL)
+table(Antropometria$edad_cat2, exclude = NULL)
 table(Antropometria$edad_cat_pipe, exclude = NULL)
 
 
@@ -253,8 +282,9 @@ table(Antropometria$edad_cat_pipe, exclude = NULL)
 
 # Exportar datos ======================================
 # write
-write_dta(mini_antro_pipes, "~/Documents/GitHub/Rbasico/mini_antro.dta")
-write_csv(mini_antro_pipes, "~/Documents/GitHub/Rbasico/mini_antro.csv")
+write_dta(mini_antro_pipes, path = "~/Documents/GitHub/Rbasico/mini_antro.dta")
+write_csv(mini_antro_pipes, file ="~/Documents/GitHub/Rbasico/mini_antro.csv")
 # save
 save(mini_antro_pipes, file = "~/Documents/GitHub/Rbasico/mini_antro.rda")
-
+# Para leer formato rda
+#load("~/Documents/GitHub/Rbasico/mini_antro.rda")
