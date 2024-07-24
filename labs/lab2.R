@@ -49,7 +49,40 @@ head(Antropometria, n = 10)  #ver los primeros 10 datos
 tail(Antropometria, n = 10)  # ver los ultimos 10 datos
 length(Antropometria$folio) # examinar una columna
 
+# Funcion glimpse nos ayuda a visualizar todas las
+# variables, de que tipo son, y algunas observaciones
 glimpse(Antropometria)
+
+# Observo que algunas variables tienen etiquetas
+# heredadas de stata por ejemplo:
+
+class(Antropometria$peso) 
+
+# Noto que es una variable numerica
+# NOTA: para deshacer vectores del tipo haven_labelled
+# aplico la funcion as.numeric
+
+Antropometria$peso_unlabelled <- as.numeric(Antropometria$peso)
+
+class(Antropometria$peso_unlabelled)
+
+# ESTO SOLO ES RECOMENDABLE EN VARIABLES QUE
+# VERDADERAMENTE SEAN NUMERICAS COMO EN ESTE CASO
+
+# Otro ejemplo:
+class(Antropometria$est_urb)
+# La variable estrato urbano, esta codificada como
+# numerica pero en verdad son categorias:
+
+Antropometria$est_urb
+
+# Puedo deshacer el vector haven_labelled de la
+# siguiente forma:
+
+Antropometria$est_urb_unlabelled <- as.numeric(as_factor(Antropometria$est_urb))
+
+# EN ESTE CASO NO ES NECESARIO DESHACERLO
+# YA QUE TAL VEZ ME INTERESA SABER LAS ETIQUETAS PARA EL FUTURO
 
 class(Antropometria$sexo)
 # numerico a categorico
@@ -62,7 +95,7 @@ class(Antropometria$sexo_char)
 Antropometria$sexo_fac <- factor(Antropometria$sexo, 
                                  levels = c(2,1), 
                                  labels = c("M", "H"))
-# categorico a numerico # CON CUIDADO!!!
+
 
 # Summary statistics ======================================
 # Estas funciones vienen predeterminadas en R
