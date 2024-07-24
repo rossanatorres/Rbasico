@@ -21,10 +21,11 @@ glimpse(FFQ)
 # Ventaja de usar pipes
 
 FFQ <- FFQ %>% 
+      #filter(nse5f == "muy alto") %>% 
        select(identifier, sexo, edadanos, region, sexo, edadanos,
               alimento, consumo) %>% 
        mutate(edad_entero = round(edadanos)) #%>% 
-       #filter(sexo == "masculino")
+       #filter(nse5f == "muy alto")
 
 
 # seleccionar
@@ -35,15 +36,16 @@ FFQ <- FFQ %>%
 
 # consumo de ssb por tipo de bebidas
 unique(FFQ$alimento)
+
 tipobebidas <- FFQ %>% 
                group_by(alimento) %>% 
                summarise(ssb_tot = sum(consumo))
 
 
-# consumo de ssb por region
+# consumo de ssb por region y alimento
 
 region <- FFQ %>% 
-  group_by(region) %>% 
+  group_by(region, alimento) %>% 
   summarise(ssb_tot = sum(consumo))
 
 
@@ -63,9 +65,8 @@ ssb_tot_indiv <- FFQ %>%
 # Opcion 2 (sin usar summarise)
 ssb_notunique <- FFQ %>% 
        group_by(identifier) %>% 
-       mutate(ssb_tot = sum(consumo, na.rm = TRUE))
-
-# ungroup()
+       mutate(ssb_tot = sum(consumo, na.rm = TRUE)) %>% 
+       ungroup()
 
 ssb_tot_indiv_complete <- ssb_notunique%>% 
   distinct(identifier, .keep_all=TRUE)
@@ -74,17 +75,22 @@ ssb_tot_indiv_complete <- ssb_notunique%>%
 # Transformar data de long a wide
 # https://tidyr.tidyverse.org/reference/pivot_wider.html
 FFQ_wide <- FFQ %>% 
-        pivot_wider(names_from = alimento, values_from = consumo)
+        pivot_wider(names_from = alimento, 
+                    values_from = consumo)
         
 sum(FFQ_wide$`refresco normal`, na.rm = TRUE)
 
 FFQ_wide <- FFQ_wide %>% 
   mutate(ssb_tot_2 = `refresco normal` + `néctares de frutas o pulpa de frutas industrializados con az`)
 
+# No hace bien la operacion por los NAs
 # Recodificar 
 FFQ_wide$`refresco normal`[is.na(FFQ_wide$`refresco normal`)] <- 0
 FFQ_wide$`néctares de frutas o pulpa de frutas industrializados con az`[is.na(FFQ_wide$`néctares de frutas o pulpa de frutas industrializados con az`)] <- 0
 
+# Vuelvo a correr
+FFQ_wide <- FFQ_wide %>% 
+  mutate(ssb_tot_2 = `refresco normal` + `néctares de frutas o pulpa de frutas industrializados con az`)
 
 FFQ_wide <- FFQ_wide %>% 
   mutate(ssb_tot_all = rowSums(across(!c("identifier",
@@ -112,7 +118,8 @@ Antropometria$identifier <- factor(paste0("folio_",
                                           "__intp_",
                                           Antropometria$intp))
 
-antropometria_mini <- select(Antropometria, identifier, peso, talla)
+antropometria_mini <- select(Antropometria, 
+                             identifier, peso, talla)
 
 
 # Merge

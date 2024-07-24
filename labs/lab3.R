@@ -96,8 +96,10 @@ ggplot(data = Antropometria) +
 # Pongo datos y aes dentro del tipo de grafica 
 ggplot() +
   geom_point(data = Antropometria, 
-             aes(x = edad, y = talla), 
-             color = "tomato3")
+             aes(x = edad, 
+                 y = talla), 
+             color = "tomato3"
+             )
 
 # Ejemplo:
 # Quiero separar mi grafica por sexo
@@ -109,19 +111,50 @@ Hombres <- filter(Antropometria, sexo == 1)
 # Notar que como tengo distintas bases debo hacer dos capas separadas
 ggplot() +
   # Capa de Hombres
-  geom_point(data = Hombres, aes(x = edad, y = talla,
-                                 color = "Hombres")) +
+  geom_point(data = Hombres,
+             aes(x = edad, 
+                 y = talla),
+              color = "magenta4") +
   # Capa de Mujeres
-  geom_point(data = Mujeres, aes(x = edad, y = talla, 
-                                 color = "Mujeres")) 
+  geom_point(data = Mujeres, 
+             aes(x = edad, 
+                 y = talla),
+             color = "magenta2") 
+
+
 # Para poder saber a que corresponde el color
+
+ggplot() +
+  # Capa de Hombres
+  geom_point(data = Hombres,
+             aes(x = edad, 
+                 y = talla,
+                 color = "Hombres")
+             ) +
+  # Capa de Mujeres
+  geom_point(data = Mujeres, 
+             aes(x = edad, 
+                 y = talla,
+                 color = "Mujeres"
+                 )
+             ) + # Agrego capa para color
+  scale_color_manual(values = c("Hombres" = "magenta4",
+                                "Mujeres" = "magenta2"))
+# Para poder saber a que corresponde el color
+
 
 
 # Solucion mas sencilla:
 ggplot() +
 
-geom_point(data = Antropometria, aes(x = edad, y = talla,
-                               color = factor(sexo))) 
+geom_point(data = Antropometria, 
+           aes(x = edad, 
+               y = talla,
+               color = factor(sexo) # use factor para respetar grupos y no numeros
+               )
+           ) + # Agrego capa para color
+  scale_color_manual(values = c("1" = "magenta4", # Uso los valores de variable sexo
+                                "2" = "magenta2"))
   
 
 
@@ -133,8 +166,14 @@ ggplot() +
   geom_point(data = Mujeres, aes(x = edad, y = talla, 
                                  color = "Mujeres")) +
   # Agrego titulo, nombres de ejes, nombre de escala de colores
-  labs(title = "Edad vs Talla", x = "Edad (años)",
-       y = "Talla (cm)", color = "Sexo")
+  labs(title = "Edad vs Talla", 
+       x = "Edad (años)",
+       y = "Talla (cm)", 
+       color = "Sexo") +
+  # Agrego capa para color
+  scale_color_manual(values = c("Hombres" = "magenta4",
+                                "Mujeres" = "magenta2")) 
+  #theme_classic()
 
 
 
@@ -154,12 +193,12 @@ migrafica
 
 
 # Opcion 1 de guardar
-ggsave("migrafica.png", migrafica)
+ggsave(filename = "migrafica2.png", plot = migrafica)
 
 
 # Opcion 2 para guardar (mejor resolucion)
 # Siempre que usemos la funcion pdf
-pdf("~/Documents/GitHub/Rbasico/migrafica2.pdf",
+pdf(file = "~/Documents/GitHub/Rbasico/migrafica3.pdf",
     width = 10, height = 7)
 
 migrafica # el objeto que queremos guardar
