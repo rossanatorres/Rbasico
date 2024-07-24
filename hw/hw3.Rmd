@@ -28,7 +28,7 @@ Podras leer el significado de cada variable
 
 ## Preguntas
 
-1. Crea una grafica que en el eje x contenga la variable **displ** (tamaño de motor) y en el eje y la variable **hwy** (eficiencia del combustible).
+1. Crea una grafica de puntos que en el eje x contenga la variable **displ** (tamaño de motor) y en el eje y la variable **hwy** (eficiencia del combustible).
 
 ```{r, echo=TRUE, warning=FALSE, eval=FALSE, echo=FALSE}
 ggplot(data = mpg) + 
@@ -36,7 +36,7 @@ ggplot(data = mpg) +
 
 ```
 
-2. Crea una grafica que en el eje x contenga la variable **displ** (tamaño de motor) y en el eje y la variable **hwy** (eficiencia del combustible) usando la variable **class** (modelo de automóvil) para colorear los puntos. 
+2. Crea una grafica de puntos que en el eje x contenga la variable **displ** (tamaño de motor) y en el eje y la variable **hwy** (eficiencia del combustible) usando la variable **class** (modelo de automóvil) para colorear los puntos. 
 
 ```{r, echo=TRUE, warning=FALSE, eval=FALSE, echo=FALSE}
 ggplot(data = mpg) + 
@@ -52,7 +52,7 @@ ggplot(data = mpg) +
 
 ```
 
-4. El gráfico muestra una relación negativa entre el tamaño del motor (**displ**) y la eficiencia del combustible (**hwy**). Añade una capa extra a la grafica de la pregunta 1, utilizando geom\_smooth(). Esencialmente, geom\_smooth() agrega una línea de tendencia sobre un gráfico existente. Apoyate en google o en la pestaña de ayuda de RStudio para utilizar la funcion correctamente. 
+4. Las gráficas anteriores muestran una relación negativa entre el tamaño del motor (**displ**) y la eficiencia del combustible (**hwy**). Añade una capa extra a la grafica de la pregunta 1, utilizando geom\_smooth(). Esencialmente, geom\_smooth() agrega una línea de tendencia sobre un gráfico existente. Apoyate en google o en la pestaña de ayuda de RStudio para utilizar la funcion correctamente. 
 
 ```{r, echo=TRUE, warning=FALSE, message=FALSE, eval=FALSE, echo=FALSE}
 ggplot(data = mpg) + 

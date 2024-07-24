@@ -34,7 +34,7 @@ FFQ <- FFQ %>%
 # Un analisis sencillo
 
 # consumo de ssb por tipo de bebidas
-
+unique(FFQ$alimento)
 tipobebidas <- FFQ %>% 
                group_by(alimento) %>% 
                summarise(ssb_tot = sum(consumo))
@@ -55,26 +55,45 @@ unique(FFQ$region)
 nrow(FFQ)
 length(unique(FFQ$identifier))
 
-ssb_unique1 <- FFQ %>% 
+ssb_tot_indiv <- FFQ %>% 
   group_by(identifier) %>% 
-  summarise(ssb_consumo = sum(consumo, na.rm = TRUE))
+  summarise(ssb_tot = sum(consumo, na.rm = TRUE))
 
-# Opcion 1 hacer merge
 
-# Opcion 2
+# Opcion 2 (sin usar summarise)
 ssb_notunique <- FFQ %>% 
        group_by(identifier) %>% 
-       mutate(ssb_consumo = sum(consumo, na.rm = TRUE))
+       mutate(ssb_tot = sum(consumo, na.rm = TRUE))
 
-ssb_unique2 <- ssb_notunique%>% 
+# ungroup()
+
+ssb_tot_indiv_complete <- ssb_notunique%>% 
   distinct(identifier, .keep_all=TRUE)
 
 
 # Transformar data de long a wide
-
-wide <- FFQ %>% 
+# https://tidyr.tidyverse.org/reference/pivot_wider.html
+FFQ_wide <- FFQ %>% 
         pivot_wider(names_from = alimento, values_from = consumo)
         
+sum(FFQ_wide$`refresco normal`, na.rm = TRUE)
+
+FFQ_wide <- FFQ_wide %>% 
+  mutate(ssb_tot_2 = `refresco normal` + `néctares de frutas o pulpa de frutas industrializados con az`)
+
+# Recodificar 
+FFQ_wide$`refresco normal`[is.na(FFQ_wide$`refresco normal`)] <- 0
+FFQ_wide$`néctares de frutas o pulpa de frutas industrializados con az`[is.na(FFQ_wide$`néctares de frutas o pulpa de frutas industrializados con az`)] <- 0
+
+
+FFQ_wide <- FFQ_wide %>% 
+  mutate(ssb_tot_all = rowSums(across(!c("identifier",
+                                "sexo",
+                                "edadanos",
+                                "region",
+                                "edad_entero")), 
+                       na.rm = TRUE))
+
 
 
 # Abrir base Antropometria ==========================================
@@ -87,8 +106,6 @@ Antropometria <- read_dta("files/Antropometria.dta")
 
 
 # Merge por identificador
-FFQ$identifier[1]
-
 
 Antropometria$identifier <- factor(paste0("folio_",
                                           Antropometria$folio,
@@ -99,7 +116,9 @@ antropometria_mini <- select(Antropometria, identifier, peso, talla)
 
 
 # Merge
-base_completa2 <- left_join(ssb_unique2, antropometria_mini, 
+# https://bookdown.org/ddiannae/curso-rdata/uniones-para-mutar.html
+# https://dplyr.tidyverse.org/reference/mutate-joins.html
+base_completa2 <- left_join(ssb_tot_indiv_complete, antropometria_mini, 
                             by = "identifier")
 
 

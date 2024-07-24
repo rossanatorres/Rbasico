@@ -42,8 +42,10 @@ ver <- select(Antropometria, edad, talla)
 Antropometria <- filter(Antropometria, talla <222)
 
 # Personalizar 
-plot(Antropometria$edad, Antropometria$talla,
-     main = "Edad vs talla", xlab = "Edad (años)", ylab = "Talla (cm)",
+plot(x = Antropometria$edad, y = Antropometria$talla,
+     main = "Edad vs talla", 
+     xlab = "Edad (años)", 
+     ylab = "Talla (cm)",
      col = "dodgerblue")
 
 
