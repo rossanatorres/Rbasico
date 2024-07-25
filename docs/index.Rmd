@@ -299,3 +299,15 @@ download_link(
   self_contained = FALSE
 )
 ```
+
+
+```{r, echo=FALSE}
+download_link(
+  link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw3.docx",
+  button_label = "Descargar tarea3.docx",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
