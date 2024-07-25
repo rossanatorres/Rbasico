@@ -76,9 +76,7 @@ z = c(TRUE, FALSE, NA)
 
 ## Problema 2. For loops
 
-Escribir un for loop para:
-
-1. Calcular la media de cada columna en el dataframe mtcars.
+1. Escribir un for loop para calcular la media de cada columna en el dataframe mtcars (preecargada).
 
 ```{r, warning=FALSE, echo=FALSE, eval=FALSE}
 medias <- c()
@@ -95,7 +93,7 @@ print(medias)
 ```
 
 
-2. Determinar el tipo de cada columna en nycflights13::flights.
+2. Instala el paquete nycflights13. Al cargar el paquete, tendrás disponible una base de datos llamada flights. Verifica qué clase de objeto es la base flights. Si es necesario, conviértela a data.frame. Determina el tipo de cada columna en la base usando un for loop.
 
 ```{r, warning=FALSE, echo=FALSE, eval=FALSE}
 #install.packages("nycflights13") # Esto solo se hace una vez en la vida!!
@@ -122,7 +120,7 @@ print(tipo)
 ```
 
 
-3. Calcule el número de valores únicos en cada columna del dataframe iris.
+3. Escribir un for loop que calcule el número de valores únicos en cada columna del dataframe iris (precargada en R).
 ```{r, warning=FALSE, echo=FALSE, eval=FALSE}
 unicos <- c()
 

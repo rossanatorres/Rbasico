@@ -49,22 +49,55 @@ estIMC <- function(kg, mt){
 }
 
 
-# Probar mi funcion
-estIMC(50, 1.53)
 
+# Probar mi funcion
+estIMC(kg = 50, mt = 1.53)
+
+kg = 50
+mt = 1.53
+imc <- kg/(mt^2)
+imc
 
 # Probar mi funcion con base
 
-ver <- estIMC(Antropometria$peso, Antropometria$talla/100)
-summary(ver)
+imc_vec <- estIMC(kg = Antropometria$peso, mt = Antropometria$talla/100)
+
+summary(imc_vec)
+
+kg = Antropometria$peso
+mt = Antropometria$talla/100
+
+imc_vec2 <- Antropometria$peso/(Antropometria$talla/100)^2
+summary(imc_vec2)
+
 
 # Guardar mi resultado en base
 Antropometria$imc <- estIMC(Antropometria$peso, 
                             Antropometria$talla/100)
 
-# Ejemplo de codigo repetido que podemos volver funcion
-# ver laboratorio 2.5
 
+
+
+# Ejemplo de codigo repetido que podemos volver funcion
+# en laboratorio 2.5
+
+# consumo de ssb por tipo de bebidas
+tipobebidas <- FFQ %>% 
+  group_by(alimento) %>% 
+  summarise(ssb_tot = sum(consumo))
+
+
+# consumo de ssb por region 
+region <- FFQ %>% 
+  group_by(region) %>% 
+  summarise(ssb_tot = sum(consumo))
+
+# consumo de ssb por individuo
+ssb_tot_indiv <- FFQ %>% 
+  group_by(identifier) %>% 
+  summarise(ssb_tot = sum(consumo, na.rm = TRUE))
+
+# NO ESPANTARSE
 agruparSumar <- function(data, grupo, sum_var){
 
   # https://cran.r-project.org/web/packages/dplyr/vignettes/programming.html
@@ -97,6 +130,21 @@ res3 <- agruparSumar(FFQ, identifier, consumo)
 # Ejemplo:
 
 # Verificar si un vector es numerico
+
+vector = c(1:10)
+
+if(is.numeric(vector)){
+  
+  print("El vector es numerico")
+  
+} else {
+  
+  print("El vector no es numerico")
+  
+}
+
+
+# Funcion para verificar si un vector es numerico
 
 vectorNumerico <- function(vector){
   
@@ -212,7 +260,6 @@ x
 
 
 
-# Aplicar funcion en vectores y guardar nuestro resultado
 
 # Problema: Calcular la mediana de cada columna
 df <- data.frame(
@@ -238,6 +285,6 @@ for (col in 1:ncol(df)) {
 }
 
 medianas
-rbind(df, medianas)
+#rbind(df, medianas)
 
 

@@ -38,6 +38,8 @@ table(is.na(Antropometria$pondef))
 Antropometria <- Antropometria %>% 
   drop_na(pondef)
 
+
+# REMOVER TODAS LAS ETIQUETAS!!!!!!!!!!!!!!
 Antropometria<-haven::zap_labels(Antropometria)
 
 Antropometria <- Antropometria %>% 
@@ -126,3 +128,25 @@ survey::svydesign(ids = ~identifier,
                  digits = everything() ~ 1)
 
 # Muy bonito pero y donde guardo mi tabla o que?
+
+tbl <- survey::svydesign(ids = ~identifier,
+                  strata=~est_var,
+                  weights = ~pondef,
+                  data=antro_mini_svy)%>%
+  tbl_svysummary(by = "sexo_lab", 
+                 include = c(imc_cat), 
+                 label = imc_cat ~ "Categoria de IMC",
+                 digits = everything() ~ 1)
+
+# Usar paquete flextable
+tbl %>%
+  as_flex_table() %>%
+  flextable::set_table_properties(layout = "autofit", opts_word = list(split = TRUE)) %>%
+  flextable::save_as_docx(path = "mitablalinda.docx") # R plots or graphic files (png, pdf and jpeg) and HTML, Word, PDF and PowerPoint
+
+
+tbl %>%
+  as_flex_table() %>%
+  flextable::set_table_properties(layout = "autofit", opts_word = list(split = TRUE)) %>%
+  flextable::save_as_pptx(path = "mitablalinda.pptx") # R plots or graphic files (png, pdf and jpeg) and HTML, Word, PDF and PowerPoint
+

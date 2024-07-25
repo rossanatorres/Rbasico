@@ -92,8 +92,8 @@ svymean(~imc_cat, design = mydesign)
 confint(svymean(~imc_cat, design = mydesign))
 
 
-# Problema 1:
-# Estimar proporcion en categorias de imc por sexo
+# Problema que quiero resolver:
+# Hacer una tabla con la proporcion de categorias de imc por sexo
 
 # Opcion 1. Estimar por sexo separado y pegar a mano en tabla
 svymean(~factor(imc_cat), design = subset(mydesign, sexo == 1))
@@ -122,14 +122,14 @@ table <- data.frame("IMC_cat" = c("Bajo peso",
                                   "Sobrepeso",
                                   "Obesidad"),
                     "Hombres" = NA, "Mujeres" = NA)
-col_names <- c("Hombres", "Mujeres")
+colnames <- c("Hombres", "Mujeres")
 
 for (sex in 1:2) {
   
   #sex <- 1
-  table[, col_names[sex]] <- (coef(svymean(~factor(imc_cat), 
+  table[, colnames[sex]] <- (coef(svymean(~factor(imc_cat), 
           design = subset(mydesign, 
-                          sexo == sex))))
+                          sexo == sex))))*100
   
   
 }
