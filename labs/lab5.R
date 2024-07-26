@@ -54,6 +54,8 @@ options(survey.lonely.psu = "adjust")
 # Ejemplo funcion svymean =========================
 svymean(~peso, design = mydesign)
 
+mean(Antropometria$peso)
+
 class(svymean(~peso, design = mydesign))
 
 mi_media <- svymean(~peso, design = mydesign)

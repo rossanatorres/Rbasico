@@ -23,7 +23,7 @@ Antropometria <- read_stata("~/Documents/GitHub/Rbasico/files/Antropometria.dta"
 
 2. Remueve TODAS las etiquetas de las variables de la base
 
-```{r, echo = TRUE, echo=FALSE, eval=TRUE}
+```{r, echo = TRUE, eval=TRUE}
 
 
 # Remuevo las etiquetas de las variables como en lab5.5
@@ -32,7 +32,7 @@ Antropometria<-haven::zap_labels(Antropometria)
 ```
 
 3. Crea la variables $identifier$, $sexo\_lab$, $imc$ e $imc\_cat$ como en el lab5.5.R
-```{r, echo = TRUE, echo=FALSE, eval=TRUE}
+```{r, echo=TRUE, eval=TRUE}
 # Crear mi identificador
 Antropometria$identifier <- factor(paste0("folio_",
                                           Antropometria$folio,
@@ -60,9 +60,9 @@ Antropometria$imc_cat <- factor(Antropometria$imc_cat,
 
 ```
 
-4. Selecciona las variables: $edad$, $sexo$, $peso$, $talla$, $imc\_cat$ y las variables de diseño de muestra: $identifier$, $code\_upm$, $pondef$, $est\_var$ de la base Antropometría y guardalas en un nuevo dataframe llamado $antro\_mini$. Asegurate de que la variable $pondef$ no tenga valores $NA$
+4. Selecciona las variables: $edad$, $sexo\_lab$, $peso$, $talla$, $imc\_cat$ y las variables de diseño de muestra: $identifier$, $code\_upm$, $pondef$, $est\_var$ de la base Antropometría y guardalas en un nuevo dataframe llamado $antro\_mini$. Asegurate de que la variable $pondef$ no tenga valores $NA$
 
-```{r, echo = TRUE, echo=FALSE, eval=TRUE}
+```{r, echo = TRUE, eval=TRUE}
 
 # Selecciono variables que quiero, tiro NAs de ponderador
 antro_mini <- Antropometria %>% 
@@ -71,9 +71,9 @@ antro_mini <- Antropometria %>%
 
 ```
 
-5. Intenta recrear la siguiente tabla con gtsummary:
+5. Intenta recrear la siguiente tabla con diseño muestral con gtsummary:
 
-```{r, echo = FALSE, message = FALSE}
+```{r, echo = TRUE, message = FALSE}
 options(survey.lonely.psu = "adjust")
 survey::svydesign(ids = ~identifier,
                   strata=~est_var,

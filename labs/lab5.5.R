@@ -141,7 +141,8 @@ tbl <- survey::svydesign(ids = ~identifier,
 # Usar paquete flextable
 tbl %>%
   as_flex_table() %>%
-  flextable::set_table_properties(layout = "autofit", opts_word = list(split = TRUE)) %>%
+  flextable::set_table_properties(layout = "autofit", 
+                                  opts_word = list(split = TRUE)) %>%
   flextable::save_as_docx(path = "mitablalinda.docx") # R plots or graphic files (png, pdf and jpeg) and HTML, Word, PDF and PowerPoint
 
 
