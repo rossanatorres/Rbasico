@@ -66,8 +66,7 @@ hist(Antropometria$peso)
 ggplot()
 # Para agregar capas utilizo el simbolo +
 
-# Agrego mis datos y las variables que quiero graficar
-
+# Opcion 1. Agrego mis datos y las variables que quiero graficar
 
 ggplot(data = Antropometria, aes(x = edad, y = talla)) 
 
@@ -102,8 +101,10 @@ ggplot() +
              )
 
 # Ejemplo:
-# Quiero separar mi grafica por sexo
+# Quiero separar mi grafica por sexo Y LA INFORMACION ESTA
+# EN BASES DISTINTAS
 
+# IMAGINEMOS que los datos NO vienen de la misma base
 Mujeres <- filter(Antropometria, sexo == 2)
 
 Hombres <- filter(Antropometria, sexo == 1)
@@ -122,7 +123,9 @@ ggplot() +
              color = "magenta2") 
 
 
-# Para poder saber a que corresponde el color
+# Para poder saber a que corresponde el color, puedo poner
+# etiquetas NOTEN QUE LAS ETIQUETAS VAN DENTRO DE aes()
+
 
 ggplot() +
   # Capa de Hombres
@@ -137,13 +140,15 @@ ggplot() +
                  y = talla,
                  color = "Mujeres"
                  )
-             ) + # Agrego capa para color
+             ) +  # SI NO AGREGO COLORES, R ESCOGERA COLORES PREDETERMINADOS
+  
+  # Agrego capa para color
   scale_color_manual(values = c("Hombres" = "magenta4",
                                 "Mujeres" = "magenta2"))
 # Para poder saber a que corresponde el color
 
 
-
+# COMO MI VARIABLE SEXO ESTA DENTRO DE MI BASE
 # Solucion mas sencilla:
 ggplot() +
 

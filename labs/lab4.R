@@ -40,30 +40,35 @@ Antropometria <- read_dta("~/Documents/GitHub/Rbasico/files/Antropometria.dta")
 # Ejemplo basico
 
 # estimar imc
-estIMC <- function(kg, mt){
+estIMC = function(kg, mt){
   
-  imc <- kg/(mt^2)
+  imc = kg/(mt^2)
   
   return(imc)
 
 }
 
-
-
 # Probar mi funcion
+
 estIMC(kg = 50, mt = 1.53)
 
+imc_fun <- estIMC(kg = 50, mt = 1.53)
+imc_fun
+
+# Corroborar manualmente
 kg = 50
 mt = 1.53
-imc <- kg/(mt^2)
-imc
+imc_manual <- kg/(mt^2)
+imc_manual
 
-# Probar mi funcion con base
+# Probar mi funcion con base Antropometria
 
-imc_vec <- estIMC(kg = Antropometria$peso, mt = Antropometria$talla/100)
+imc_vec <- estIMC(kg = Antropometria$peso, 
+                  mt = Antropometria$talla/100)
 
 summary(imc_vec)
 
+# Corrobar manualmente
 kg = Antropometria$peso
 mt = Antropometria$talla/100
 
@@ -97,6 +102,8 @@ ssb_tot_indiv <- FFQ %>%
   group_by(identifier) %>% 
   summarise(ssb_tot = sum(consumo, na.rm = TRUE))
 
+
+
 # NO ESPANTARSE
 agruparSumar <- function(data, grupo, sum_var){
 
@@ -110,9 +117,36 @@ agruparSumar <- function(data, grupo, sum_var){
 }
 
 # Probar
-res <- agruparSumar(FFQ, alimento, consumo)
-res2 <- agruparSumar(FFQ, region, consumo)
-res3 <- agruparSumar(FFQ, identifier, consumo)
+# consumo de ssb por tipo de bebidas
+tipobebidas_fun <- agruparSumar(data = FFQ, grupo = alimento, 
+                    sum_var = consumo)
+
+# Equivalente
+tipobebidas <- FFQ %>% 
+  group_by(alimento) %>% 
+  summarise(ssb_tot = sum(consumo))
+
+
+# Consumo por region
+region_fun <- agruparSumar(data = FFQ, grupo =region, 
+                     sum_var = consumo)
+
+
+# Equivalente  
+region <- FFQ %>% 
+  group_by(region) %>% 
+  summarise(ssb_tot = sum(consumo))
+
+# consumo de ssb por individuo
+ssb_tot_indiv_fun <- agruparSumar(data = FFQ, 
+                     grupo = identifier, 
+                     sum_var = consumo)
+
+
+# Equivalente
+ssb_tot_indiv <- FFQ %>% 
+  group_by(identifier) %>% 
+  summarise(ssb_tot = sum(consumo, na.rm = TRUE))
 
 
 # if else statement ==================================
@@ -158,21 +192,19 @@ vectorNumerico <- function(vector){
     
   }
   
-  
-  
 }
 
 x <- c(1,2,3)
 y <- c("Rossana", "Torres")
 z <- c(TRUE, FALSE, NA)
 
-vectorNumerico(x)
-vectorNumerico(y)
-vectorNumerico(z)
+vectorNumerico(vector = x)
+vectorNumerico(vector = y)
+vectorNumerico(vector =z)
 
 # Multiples condiciones
 # Estructura general:
-# Cuerpo de ifelse anidados NO CORRER
+# Cuerpo de if else anidados NO CORRER
 
 # if (condicion) {
 #   # Hace algo
@@ -221,10 +253,13 @@ if(x > 1){
 
 # Ejemplo facil:
 vector <- c("Rossana", "Torres", "Alvarez")
+length(vector)
+1:3
 
-for (i in 1:length(vector)) {
+for (elemento in 1:length(vector)) {
   
-  print(vector[i])
+  #elemento = 1
+  print(vector[elemento])
   
 }
 
@@ -232,6 +267,7 @@ for (i in 1:length(vector)) {
 # Resolver el problema de if else
 
 x = -10:10
+#1:length(x)
 
 for (i in 1:length(x)) {
   
@@ -274,17 +310,22 @@ median(df$b)
 median(df$c)
 median(df$d)
 
-medianas <- c()
+medianas_manual <- c(median(df$a), median(df$b),
+                     median(df$c), median(df$d))
 
-for (col in 1:ncol(df)) {
+#medianas_loop <- c(NA, NA, NA, NA, NA, NA)
+medianas_loop <- c()
   
-  #col <- 2
+for (columna in 1:ncol(df)) {
   
- medianas[col] <- (median(df[,col]))
+  #columna <- 1
+  #median(df[,columna])
+ 
+  medianas_loop[columna] <- median(df[,columna])
   
 }
 
-medianas
+medianas_loop
 #rbind(df, medianas)
 
 
