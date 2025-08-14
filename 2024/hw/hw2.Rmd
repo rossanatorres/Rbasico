@@ -1,5 +1,5 @@
 ---
-title: "PASPE 2023: R básico"
+title: "PASPE 2024: R básico"
 subtitle: "Tarea 2"
 author: "Rossana Torres Alvarez"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
@@ -28,23 +28,35 @@ library(haven)
 # Uso la funcion read_dta y pego la direccion local donde tengo la base
 Antropometria <- read_dta("~/Documents/GitHub/Rbasico/files/Antropometria.dta")
 
+# NOTA: para deshacer vectores del tipo haven_labelled
+# aplico la funcion as.numeric
+# ESTO SOLO ES RECOMENDABLE EN VARIABLES QUE
+# VERDADERAMENTE SEAN NUMERICAS COMO EN ESTE CASO
+
+Antropometria$talla_unlabelled <- as.numeric(Antropometria$talla)
+
 # Uso la funcion ncol para observar el numero de columnas
 ncol(Antropometria)
 
 # Uso la funcion head para enseñar las primeras 15 observaciones
 head(Antropometria, 15)
 
+# Opcion 1 para estimar cuantiles 
 # Uso el operador $ para seleccionar la columna talla y despues aplico
 # la funcion quantile. NOTA utilizo la opcion na.rm = TRUE en caso de que tenga observaciones con NA
-quantile(Antropometria$talla, na.rm = TRUE)
 
-# Uso la funcion max y min para estimar el maximo y minimo de talla
-max(Antropometria$talla, na.rm = TRUE)
+quantile(Antropometria$talla_unlabelled, na.rm = TRUE)
 
-min(Antropometria$talla, na.rm = TRUE)
+# Opcion 1 para estimar el maximo y el minimo:
+#Uso la funcion max y min para estimar el maximo y minimo de talla
+max(Antropometria$talla_unlabelled, na.rm = TRUE)
+
+min(Antropometria$talla_unlabelled, na.rm = TRUE)
 
 # Opcion 2 uso la funcion summary para obtener un resumen de las estadisticas
 summary(Antropometria$talla)
+# Mismo resultado si uso mi nueva variable sin etiquetas
+summary(Antropometria$talla_unlabelled)
 ```
 
 ## Problema 2. Manejo de datos
@@ -87,7 +99,14 @@ head(Antropometria$imc,3)
 
 # b) Usando dplyr
 
+# Sin pipes
 Antropometria <- mutate(Antropometria, imc = peso/(talla/100)^2)
+
+# Con pipes (equivalente a lo de arriba)
+
+Antropometria <- Antropometria %>% 
+                 mutate( imc = peso/(talla/100)^2)
+
 head(Antropometria$imc,3)
 
 # 5. Creo una variable con las categorias de imc de la OMS utilizando los criterios usados en la tarea 1.

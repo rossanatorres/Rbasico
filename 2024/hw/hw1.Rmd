@@ -1,5 +1,5 @@
 ---
-title: "PASPE 2023: R básico"
+title: "PASPE 2024: R básico"
 subtitle: "Tarea 1"
 author: "Rossana Torres Alvarez"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
@@ -47,10 +47,12 @@ que se encuentra en el rango de peso bajo (i.e imc $<$ 18 )?
 ```{r}
 # Uso una operacion logica
 imc < 18
+
+
 ```
 No, el imc se encuentra en el rango de peso normal
 
-5 Crea un vector que contenga al vector kg, mt y bmi
+5. Crea un vector que contenga al vector kg, mt y imc
 
 ```{r}
 antrop <- c(kg, mt, imc)
@@ -69,14 +71,26 @@ print(frase)
 
 
 7. Copia la siguiente linea y correla en RStudio, que observas? Si hay algun error, intenta resolverlo
-```{r, eval = FALSE}
+```{r, eval=FALSE}
 mivector1 = c(1:100)
 mivector1 = (101:200)
 mivector3 = c(mivector1, mivector2)
-# Leo el error que me arroja la consola:
-```
 
-Mi vector1 se reescribio porque no cambie el nombre y como consecuencia mivector3 no puede ser creado
+# Leo el error que me arroja la consola:
+# Error:
+#! object 'mivector2' not found
+
+
+
+
+```
+Mi vector2 no existe porque vector1 se reescribio porque no cambie el nombre y como consecuencia mivector3 no puede ser creado. Corregido:
+
+```{r}
+mivector1 = c(1:100)
+mivector2 = (101:200)
+mivector3 = c(mivector1, mivector2)
+```
 
 ## Problema 2. Vectores, dataframes y listas
 
@@ -84,6 +98,10 @@ Mi vector1 se reescribio porque no cambie el nombre y como consecuencia mivector
 Obesidad grado I, Obesidad grado II, Obesidad grado III) y llamalo cat_names
 
 ```{r}
+
+
+
+
 cat_names <- c("Bajo peso", "Peso normal", "Sobrepeso",
 "Obesidad grado I", "Obesidad grado II", "Obesidad grado III")
 print(cat_names)
@@ -145,7 +163,8 @@ milista <- list(kg, imc, imc_df)
 
 8. Accede a la columna cat dentro de la lista
 ```{r}
-# Opcion1. Accedo al imc_df que es el tercer objeto y a la columna cat
+# Opcion1. Accedo al imc_df que es el tercer objeto y a la columna cat (que es la columna 2 del data.frame)
+milista[[3]][2]
 milista[[3]]["cat"]
 
 # Opcion 2. Nombro los objetos de la lista

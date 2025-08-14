@@ -1,5 +1,5 @@
 ---
-title: "PASPE 2023: R básico"
+title: "PASPE 2024: R básico"
 subtitle: "Tarea 4"
 author: "Rossana Torres Alvarez"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Problema 1. Funciones e if else statements
 
-1. Explica lo que hace esta función
+1. Explica lo que hace esta función y muestra un ejemplo de su uso
 
 ```{r, eval = TRUE}
 f3 <- function(x, y) {
@@ -23,9 +23,10 @@ f3 <- function(x, y) {
 }
 ```
 
-La funcion repite el elemento y, tantas veces como la longitud del objeto x. Demostracion:
 
 ```{r}
+# La funcion repite el elemento y, tantas veces como la longitud del objeto x. Demostracion:
+
 # x es un vector de 3 elementos
 x <- c(1:3)
 # Verifico
@@ -53,6 +54,8 @@ vectorType = function(vector){
   }
 }
 
+
+
 ```
 3. Prueba tu función con los siguientes vectores
 ```{r, warning=FALSE}
@@ -63,17 +66,18 @@ z = c(TRUE, FALSE, NA)
 vectorType(x)
 vectorType(y)
 vectorType(z)
-
 ```
 3. Explica la diferencia entre un if else statement y la función ifelse() que usamos en el laboratorio 2
 
-Un if else statement nos devuelve un solo valor logico. En cambio, la funcion ifelse nos devuelve vectores de valores logicos.
+La condición dentro de un if else statement nos devuelve un solo valor logico. En cambio, la condición dentro de la funcion ifelse nos devuelve vectores de valores logicos.
+```{r, echo = FALSE, eval=FALSE}
+# Un if else statement nos devuelve un solo valor logico. En cambio, la funcion ifelse nos devuelve vectores de valores logicos.
+
+```
 
 ## Problema 2. For loops
 
-Escribir un for loop para:
-
-1. Calcular la media de cada columna en el dataframe mtcars.
+1. Escribir un for loop para calcular la media de cada columna en el dataframe mtcars (preecargada).
 
 ```{r, warning=FALSE}
 medias <- c()
@@ -90,7 +94,7 @@ print(medias)
 ```
 
 
-2. Determinar el tipo de cada columna en nycflights13::flights.
+2. Instala el paquete nycflights13. Al cargar el paquete, tendrás disponible una base de datos llamada flights. Verifica qué clase de objeto es la base flights. Si es necesario, conviértela a data.frame. Determina el tipo de cada columna en la base usando un for loop. Si la consola te da un warning lee con cuidado y verifica tu resultado.
 
 ```{r, warning=FALSE}
 #install.packages("nycflights13") # Esto solo se hace una vez en la vida!!
@@ -117,8 +121,10 @@ print(tipo)
 ```
 
 
-3. Calcule el número de valores únicos en cada columna del dataframe iris.
+3. Escribir un for loop que calcule el número de valores únicos en cada columna del dataframe iris (precargada en R). Si la consola te da un warning lee con cuidado y verifica tu resultado.
 ```{r, warning=FALSE}
+
+
 unicos <- c()
 
 print(unicos)
