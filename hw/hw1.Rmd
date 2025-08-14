@@ -1,15 +1,16 @@
 ---
-title: "PASPE 2024: R básico"
+title: "PASPE 2025: R básico"
 subtitle: "Tarea 1"
 author: "Rossana Torres Alvarez"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
-  word_document: default
+  word_document: 
+  reference_docx: "template.docx"
 ---
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, eval = FALSE)
 ```
 
 ## Problema 1. Operaciones 
@@ -71,20 +72,13 @@ print(frase)
 
 
 7. Copia la siguiente linea y correla en RStudio, que observas? Si hay algun error, intenta resolverlo
-```{r, eval=FALSE}
+```{r, eval=FALSE, echo=TRUE}
 mivector1 = c(1:100)
 mivector1 = (101:200)
 mivector3 = c(mivector1, mivector2)
 
-# Leo el error que me arroja la consola:
-# Error:
-#! object 'mivector2' not found
-
-
-
-
 ```
-Mi vector2 no existe porque vector1 se reescribio porque no cambie el nombre y como consecuencia mivector3 no puede ser creado. Corregido:
+
 
 ```{r}
 mivector1 = c(1:100)
