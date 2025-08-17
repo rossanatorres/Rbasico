@@ -275,9 +275,9 @@ download_link(
 )
 ```
 
-# Tareas
+# Respuestas de tareas
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, include = FALSE}
 download_link(
   link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw1.docx",
   button_label = "Descargar tarea1.docx",
