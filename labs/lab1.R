@@ -1,72 +1,75 @@
 
-rm(list=ls())
-# Clase 1. R Basico !!!!!!!!!!!!!
+########## Tipos de objetos en R #############################
 
-# Como correr codigo
+# Definir variables (UN elemento/simbolo que representa un valor)===========================
 
-# Definir variables =====================================================
+#  1 es el valor asignado a val1
 
-#  X es el valor asignado a x
-# escoger un nombre adecuado
+# escoger un nombre adecuado (ver diapositivas)
 
 val1 <- 1
 
 # el simbolo <- es equivalente a = 
-val2 = 2 
+val1 = 1
+
 
 # Reescribir variable
 # cuidado!!!
+val2 = 2
 
-# Variable vacia
-vacia <- NA
+# Tipos de variables 
 
-# Valor logico
+# val1 y val2 son
 
-logico <- TRUE
-logico <- FALSE
-logico <- T
-logico <- F
+# Variable "perdida" (el valor existe pero no es conocido)
+perdida = NA
 
+# Valor logico (para pruebas logicas)
+
+
+# Variable caracter 
 
 # Funcion class
+# Nota: Una función es algún procedimiento que queremos aplicar a algún objecto para
+# obtener algún resultado
+
+# nombredefuncion(argumento)
+
 class(val1)
 class(logico)
-class(vacia)
+class(perdida)
+class(caracter)
 
 # Ver que hay dentro de variable
 
 # opcion 1
-val2 <- 2
-val2
 
 # opcion 2
-(val2 <- 2) # cuidado si no cerramos nos sale error
 #(val2 <- 2 #usar esc para evitar quedarnos atorados en el codigo
 
 # opcion 3
 print(val2)
 
 
-# Hacer operaciones aritmeticas
+# Hacer operaciones aritmeticas (ver diapositivas)
 val1 + val2
 
 val3 <- val1 + val2
 
 val4 <- val3 + 2
 
-# Hacer operacion logica
+# Hacer operacion logica (ver diapositivas)
 
-val4 > 8
-val4 < 8
-val4 <= 8
-val4 >= 8
-val4 == 6
+
 
 # Vectores =====================================================
 
-# Crear vector
+# Un vector es un arreglo de variables. Tambien hay distintos tipos:
+
 #1. Numericos
-mivector1 <- c(1, 2, 3)
+
+# Creo mi vector (ver diapositivas)
+mivector1 = c(1,2,3)
 class(mivector1)
 
 # Dimension de un vector
@@ -87,27 +90,31 @@ mivector1 + mivector2
 mivector1
 mivector2
 mivector1 + mivector2
+
 # logicas
+mivector1 > mivector2
 
+mivector5 <- c(1,2,3, 4)
 
-# class
-class(mivector1)
+mivector1 > mivector5
+
 
 # Asignar arreglo de valores 
 
 # a:b es para establecer un rango de a a b
-x <- 1:4 
+
+# 1 a 4
 x
 
 
 
-y <- rep(x = 7, times = 4) # Crear un vector que contiene 4 7s
+# Crear un vector que contiene 4 7s
 y
 
 # Usar ayuda para mas informacion
 
 # Secuencias
-a <- seq(from = 10, to = 23, by = 1) # contar de 10 to a cada 1 unidad
+a <- seq(from = 10, to = 23, by = 1) # contar de x a y cada 1 unidad
 a
 b <- seq(from = 10, to = 23) # equivalente
 b
@@ -117,31 +124,36 @@ d <- seq(10, 23) # equivalente
 d
 
 
-# Vector vacio
+# Vector vacio (el valor no existe y no es conocido)
 vec_vacio <- c()
 
 vec_vacio
 
-class(vec_vacio)
+class(vec_vacio) 
 
 # 2. Caracteres 
 
-# Nombres de perritos mexicanos
+# Nombres de perritos 
+perritos <- c("Cookie")
 
-perritos <- c("Copito", 'Firulais')
 class(perritos)
 
-apellidos <- c("Torres", "Alvarez")
+apellidos <- c("Torres")
 
 
 # operacion (?) con caracteres
 
-nombres <- paste0(perritos," ",apellidos, perritos)
+nombres <- paste0(perritos," ", apellidos)
 
 resultado <- c(nombres, apellidos)
 
 
-# Indexar vectores 
+# 3. Logicos
+
+
+
+
+# Indexar vectores (indicar posicion de algun elemento)
 
 z <- x + y
 z
@@ -149,7 +161,9 @@ z
 length(z)# parentesis redondos son para funciones
 
 z
-z[3] # parentesis cuadrados son para indices
+# parentesis cuadrados son para indices
+# obtener el elemento 3
+z[3] 
 z[2]
 z[1:3] # 
 
@@ -157,6 +171,7 @@ z[1:3] #
 
 # Matrices ===============================================================
 
+# Una matriz es un arreglo de vectores del mismo tipo 
 mimatriz <- matrix(data = 1, nrow = 4, ncol = 3)
 mimatriz
 
@@ -185,7 +200,7 @@ mimatriz["Fila2","Columna3"]
 # Crear un dataframe
 df <- data.frame(x, y, z)
 
-# OJO: mismo numero de filas entre columnas (vectores)
+# Lista de variables con el mismo numero de elementos (filas) entre variables (columnas)
 
 df # Ver que hay dentro del dataframe
 df$x # Usa $ para acceder columnas
@@ -199,8 +214,8 @@ dim(df)
 
 colnames(df) <- c("Columna1", "Columna2", "Columna3")
 df
-# Alternativa:
-df <- data.frame("columna1"= x, "columna2" = y, "columna3" =z)
+# Alternativa: Nombrar al crear
+
 df
 
 # Obtener nombres de dataframe
@@ -216,8 +231,6 @@ df[c(1, 2, 3), ] # Seleccionar mas de una fila
 df[1:3, ] # Seleccionar mas de una fila
 
 
-#df[c("columna1", "columna2"), ]
-
 # pregunta que quiero contestar
 df[, 1] > 2
 
@@ -226,9 +239,6 @@ df
 df[df[, 1] > 2, ] # Operacion logica en fila
 
 # Que notan?
-
-
-
 
 
 # Hacer calculos/aplicar funciones
@@ -240,17 +250,17 @@ sum(missings, na.rm = TRUE)
 
 # Reasignar valores
 
-df[3, 2] # un elemento: fil 3 columna 2
+df[3, 2] # un elemento: fila 3 columna 2
 df[3, 2] <- 5 
 df[3, 2] <- c(5,2) # Para reasignar me tengo que fijar en la dimension!!!!
 dim(df[3, ])
 df[3, ] <- c(1,1,1) # Reasignar con misma dimension
 
-df$prueba_logica <- rep(NA, nrow(df))
-df$prueba_logica <- df[, 1] > 2
 
-# Ordenar valores de columnas
 
+# Temas basicos extra:
+
+# Ordenar valores de vectores
 
 sort(x, decreasing = F) # valor default
 sort(x, decreasing = T) # cambiar default
@@ -268,24 +278,29 @@ mifactor <- factor(micaracter, levels = c("Bajo",
                                           "Muy alto"))
 class(mifactor)
 
+# Un factor es otro tipo de objeto en el cual sus elementos tienen un orden
+# predeterminado
+
+
+# Extender dataframes
 df
-df2 <- cbind.data.frame(df, "columna4" = mifactor)
+df2 <- cbind.data.frame(df, "Columna4" = mifactor)
 df2
 
-row <- data.frame("columna1"=1, "columna2"=1, "columna3"=1)
+row <- data.frame("Columna1"=1, "Columna2"=1, "Columna3"=1)
 df3 <- rbind.data.frame(df[,1:3], row)
+df3
 
 # Ojo: mismo numero de filas entre columnas
 df4 <- rbind.data.frame(df2, row)
 
-row <- data.frame("columna1"=1, "columna2"=1, "columna3"=1, "columna4" = 1)
+df4
+row <- data.frame("Columna1"=1, "Columna2"=1, "Columna3"=1, "Columna4" = "Alto")
 df4 <- rbind.data.frame(df2, row)
-
-row <- data.frame("columna1"=1, "columna2"=1, "columna3"=1, "columna4" = "Alto")
-df4 <- rbind.data.frame(df2, row)
+df4
 
 # Crear listas =============================================================
-# Arreglo de objetos de cualquier tamano
+# Arreglo de objetos de cualquier tamano (ver diapositivas)
 milista <- list(1:10, 1:20, df2)
 names(milista) <- c("vector_uno", "vector_dos","data_frame")
 
@@ -294,10 +309,12 @@ names(milista) <- c("vector_uno", "vector_dos","data_frame")
 # Checar dimension de lista = numbero de elementos
 length(milista)
 
+ver = milista[1]
+
 milista[[1]] #accesar al primer elemento de la lista
 milista$vector_dos # accesar por nombre
 milista[["vector_uno"]][10] #accesar al elemento 10 del objeto 1
-milista$data_frame$columna1[1:3] #accesar al data frame, columna1 y los primeros 3 elementos de la columna
+milista$data_frame$Columna1[1:3] #accesar al data frame, columna1 y los primeros 3 elementos de la columna
 
 #
 rm(val4) # borrar algun elemento
