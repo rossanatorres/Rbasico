@@ -1,9 +1,16 @@
 
+# R basico clase 1 
+# Rossana
+# Torres
+# Alvarez
+
 ########## Tipos de objetos en R #############################
 
 # Definir variables (UN elemento/simbolo que representa un valor)===========================
 
 #  1 es el valor asignado a val1
+val1 =1
+Val1 = 1
 
 # escoger un nombre adecuado (ver diapositivas)
 
@@ -14,6 +21,9 @@ val1 = 1
 
 
 # Reescribir variable
+
+val1 = 2
+
 # cuidado!!!
 val2 = 2
 
@@ -24,10 +34,17 @@ val2 = 2
 # Variable "perdida" (el valor existe pero no es conocido)
 perdida = NA
 
-# Valor logico (para pruebas logicas)
-
+# Variable logico (para pruebas logicas)
+logica = TRUE
+logica = FALSE
+logica = T
+logica = F
 
 # Variable caracter 
+
+caracter = "Rossana"
+caracter2 = "Torres"
+
 
 # Funcion class
 # Nota: Una función es algún procedimiento que queremos aplicar a algún objecto para
@@ -35,17 +52,23 @@ perdida = NA
 
 # nombredefuncion(argumento)
 
+class(x = val1)
 class(val1)
-class(logico)
+class(logica)
 class(perdida)
 class(caracter)
 
-# Ver que hay dentro de variable
 
+# Ver que hay dentro de variable
+val1 = 1
+val1
 # opcion 1
 
+(val2 = 2)
 # opcion 2
 #(val2 <- 2 #usar esc para evitar quedarnos atorados en el codigo
+
+(val2 <- 2)
 
 # opcion 3
 print(val2)
@@ -60,6 +83,9 @@ val4 <- val3 + 2
 
 # Hacer operacion logica (ver diapositivas)
 
+val4 == 6
+val4 > 4
+val4 >= 5
 
 
 # Vectores =====================================================
@@ -70,10 +96,14 @@ val4 <- val3 + 2
 
 # Creo mi vector (ver diapositivas)
 mivector1 = c(1,2,3)
+
+
 class(mivector1)
 
-# Dimension de un vector
+
+# Longitud de un vector
 # funcion length, ver ayuda
+length(x = mivector1)
 length(mivector1)
 
 # Operaciones con vectores
@@ -98,18 +128,24 @@ mivector5 <- c(1,2,3, 4)
 
 mivector1 > mivector5
 
+# Concatenar vectores
+mivector6 <- c(mivector1, mivector2)
+mivector6
+
+# Tengo un vector de longitud 6
+
 
 # Asignar arreglo de valores 
 
 # a:b es para establecer un rango de a a b
 
 # 1 a 4
+x = 1:15
 x
 
 
-
 # Crear un vector que contiene 4 7s
-y
+y = rep(x = 7, times = 4)
 
 # Usar ayuda para mas informacion
 
@@ -134,24 +170,27 @@ class(vec_vacio)
 # 2. Caracteres 
 
 # Nombres de perritos 
-perritos <- c("Cookie")
+perritos <- c("Cookie", "Copito")
 
 class(perritos)
 
-apellidos <- c("Torres")
+apellidos <- c("Torres", "Alvarez")
 
 
 # operacion (?) con caracteres
 
 nombres <- paste0(perritos," ", apellidos)
 
-resultado <- c(nombres, apellidos)
+resultado <- c(perritos, apellidos)
 
 
 # 3. Logicos
 
+vec_logico <- rep(NA, 10)
+vec_logico
 
-
+vec_logico <- rep(TRUE, 10)
+vec_logico
 
 # Indexar vectores (indicar posicion de algun elemento)
 
@@ -167,7 +206,7 @@ z[3]
 z[2]
 z[1:3] # 
 
-
+apellidos[2]
 
 # Matrices ===============================================================
 
@@ -180,8 +219,12 @@ mimatriz
 # OJO: mismo numero de filas entre columnas
 mimatriz[1,1] # elemento en fila 1, columna 1
 mimatriz[1,1:3] # primera fila, todas las columnas
+mimatriz[1,1:2] # primera fila, todas las columnas
+
+
 mimatriz[1,] # primera fila todas las columnas
 mimatriz[,2]
+
 # Dimension de matriz
 dim(mimatriz)
 
@@ -204,6 +247,8 @@ df <- data.frame(x, y, z)
 
 df # Ver que hay dentro del dataframe
 df$x # Usa $ para acceder columnas
+df[,1]
+
 df$y
 
 # Dimension de dataframe
@@ -216,7 +261,9 @@ colnames(df) <- c("Columna1", "Columna2", "Columna3")
 df
 # Alternativa: Nombrar al crear
 
-df
+df <- data.frame("Columna1" = 1:12,
+                 "Columna2" = 1:12,
+                 "Columna3" = 1:12)
 
 # Obtener nombres de dataframe
 colnames(df)
@@ -240,12 +287,15 @@ df[df[, 1] > 2, ] # Operacion logica en fila
 
 # Que notan?
 
+# Seleccione un subconjunto de mi dataframe que cumpliera
+# la condicion > 2
 
 # Hacer calculos/aplicar funciones
 sum(df[, 1], na.rm = T)
-sum(x)
+sum(1:5)
 
 missings = c(1, 2, NA, NA)
+sum(missings)
 sum(missings, na.rm = TRUE)
 
 # Reasignar valores
@@ -253,6 +303,7 @@ sum(missings, na.rm = TRUE)
 df[3, 2] # un elemento: fila 3 columna 2
 df[3, 2] <- 5 
 df[3, 2] <- c(5,2) # Para reasignar me tengo que fijar en la dimension!!!!
+
 dim(df[3, ])
 df[3, ] <- c(1,1,1) # Reasignar con misma dimension
 
@@ -271,12 +322,16 @@ micaracter
 micaracter <- sort(micaracter, decreasing = T)
 micaracter
 
+micaracter <- c(micaracter, micaracter, "Bajo",
+                "Alto", "Medio", "Muy alto")
+
 # Crear factor para ordenar jerarquicamente 
 mifactor <- factor(micaracter, levels = c("Bajo", 
                                           "Medio", 
                                           "Alto", 
                                           "Muy alto"))
 class(mifactor)
+
 
 # Un factor es otro tipo de objeto en el cual sus elementos tienen un orden
 # predeterminado
