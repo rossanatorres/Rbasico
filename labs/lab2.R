@@ -10,14 +10,14 @@ library(haven)
 #install.packages("haven") 
 
 # Donde yo tengo los archivos que estare usando
-setwd("~/Documents/GitHub/Rbasico")
+setwd(dir = "~/Documents/GitHub/Rbasico")
+
 # Alternativa:
 # Si ya tengo un R script guardado en una carpeta que quiero usar
 # Session/Set working directory/ to source file location
 
 # Verificar
 getwd() 
-
 
 
 # Abrir base y explorar base de datos (ver diapositivas)=========================
@@ -29,7 +29,7 @@ getwd()
 # #Leer libro de excel
 # data_list <- import_list("files/out_agecat_reclassifed1_weighted_2021.xlsx",
 #                          setclass = "data.frame")
-# age_cat1 = data_list[[1]] #seleccionar primera hoja de calculo
+# # age_cat1 = data_list[[1]] #seleccionar primera hoja de calculo
 # age_cat1 = data_list$agecat_1 #seleccionar primera hoja de calculo
 
 
@@ -42,6 +42,7 @@ Antropometria <- read_dta("files/Antropometria.dta")
 
 class(Antropometria)  
 dim(Antropometria)  #ver dimension de dataframe
+
 colnames(Antropometria) #ver columnas que tengo en dataframe
 
 
@@ -49,6 +50,7 @@ nrow(Antropometria)  #ver cuantas filas
 ncol(Antropometria)   # ver cuantas columnas hay
 head(Antropometria, n = 10)  #ver los primeros 10 datos
 tail(Antropometria, n = 10)  # ver los ultimos 10 datos
+
 length(Antropometria$folio) # examinar longitud de una columna
 
 # Funcion glimpse nos ayuda a visualizar todas las
@@ -174,7 +176,7 @@ Antropometria$mi_imc <- Antropometria$peso/(Antropometria$talla/100)^2
 
 
 # Inicializar una columna vacia
-Antropometria$sexo_lab <- NA #otra opcion (que no recomiendo)
+Antropometria$sexo_lab <- NA #otra opcion
 Antropometria$sexo_lab <- rep(NA, nrow(Antropometria)) # esta opcion si recomiendo
 
 # Reescribir columna anterior en funcion a otra columna (sexo)
@@ -247,6 +249,8 @@ glimpse(Antropometria) # visualizar la base de datos
 
 x <- rnorm(10) #un vector de 10 elementos 
 x %>% max  # a x aplica la funcion max()
+
+
 # es lo mismo que
 max(x)
 
@@ -256,14 +260,17 @@ max(x)
 
 x %>% max %>% length
 
+x
+y= max(x)
+length(y)
 
 # Seleccionar solo las columnas que me interesan
 
-mini_antro <- select(Antropometria, peso, talla)
+mini_antro <- dplyr::select(Antropometria, peso, talla)
 mini_antro <- Antropometria[, c("peso", "talla")] #equivalente
 
 # con pipes
-mini_antro_pipes <- Antropometria %>% select(peso, talla)
+mini_antro_pipes <- Antropometria %>% select(peso, talla) 
 
 
 # Seleccionar solo las filas que me interesan
@@ -298,7 +305,7 @@ Antropometria$tres <- rep(NA, nrow(Antropometria))
 Antropometria$tres <- 3
 
 
-# Base de datos         # nueva columna
+                      # Base de datos   # nueva columna
 Antropometria <- mutate(Antropometria, dos = 2)
 
 # con pipes
@@ -350,5 +357,7 @@ write_csv(mini_antro_pipes, file ="~/Documents/GitHub/Rbasico/mini_antro.csv")
 
 # Funcion save
 save(mini_antro_pipes, file = "~/Documents/GitHub/Rbasico/mini_antro.rda")
+save(data_list, file = "~/Documents/GitHub/Rbasico/mini_antro.rda")
+
 # Para leer formato rda
-#load("~/Documents/GitHub/Rbasico/mini_antro.rda")
+load("~/Documents/GitHub/Rbasico/dia2.RData")
