@@ -30,7 +30,7 @@ Podras leer el significado de cada variable
 
 1. Crea una grafica de puntos que en el eje x contenga la variable **displ** (tamaño de motor) y en el eje y la variable **hwy** (eficiencia del combustible).
 
-```{r, echo=TRUE, warning=FALSE}
+```{r, echo=TRUE, warning=FALSE, include=FALSE}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy))
 
@@ -38,7 +38,7 @@ ggplot(data = mpg) +
 
 2. Crea una grafica de puntos que en el eje x contenga la variable **displ** (tamaño de motor) y en el eje y la variable **hwy** (eficiencia del combustible) usando la variable **class** (modelo de automóvil) para colorear los puntos. 
 
-```{r, echo=TRUE, warning=FALSE}
+```{r, echo=TRUE, warning=FALSE, include=FALSE}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, color = class))
 
@@ -46,7 +46,7 @@ ggplot(data = mpg) +
 
 3. Repite la grafica anterior, solo que ahora cambia el tamaño de los puntos de acuerdo al modelo de automóvil (Hint: usa size dentro de aes()). 
 
-```{r, echo=TRUE, warning=FALSE}
+```{r, echo=TRUE, warning=FALSE, include=FALSE}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, size = class))
 
@@ -54,7 +54,7 @@ ggplot(data = mpg) +
 
 4. Las gráficas anteriores muestran una relación negativa entre el tamaño del motor (**displ**) y la eficiencia del combustible (**hwy**). Añade una capa extra a la grafica de la pregunta 1, utilizando geom\_smooth(). Esencialmente, geom\_smooth() agrega una línea de tendencia sobre un gráfico existente. Apoyate en google o en la pestaña de ayuda de RStudio para utilizar la funcion correctamente. 
 
-```{r, echo=TRUE, warning=FALSE, message=FALSE}
+```{r, echo=TRUE, warning=FALSE, message=FALSE, include=FALSE}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy)) + 
   geom_smooth(mapping = aes(x = displ, y = hwy))
