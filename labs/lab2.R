@@ -20,7 +20,7 @@ getwd()
 
 
 
-# Abrir base y explorar base de datos =========================
+# Abrir base y explorar base de datos (ver diapositivas)=========================
 
 # # SOLO PARA DEMOSTRACION NO CORRER
 # # Leer csv
@@ -42,23 +42,25 @@ Antropometria <- read_dta("files/Antropometria.dta")
 
 class(Antropometria)  
 dim(Antropometria)  #ver dimension de dataframe
-colnames(Antropometria) #ver variables que tengo en dataframe
+colnames(Antropometria) #ver columnas que tengo en dataframe
+
+
 nrow(Antropometria)  #ver cuantas filas
 ncol(Antropometria)   # ver cuantas columnas hay
 head(Antropometria, n = 10)  #ver los primeros 10 datos
 tail(Antropometria, n = 10)  # ver los ultimos 10 datos
-length(Antropometria$folio) # examinar una columna
+length(Antropometria$folio) # examinar longitud de una columna
 
 # Funcion glimpse nos ayuda a visualizar todas las
-# variables, de que tipo son, y algunas observaciones
+# columnas, de que tipo son, y algunas observaciones
 glimpse(Antropometria)
 
-# Observo que algunas variables tienen etiquetas
+# Observo que algunas columnas tienen etiquetas
 # heredadas de stata por ejemplo:
 
 class(Antropometria$peso) 
 
-# Noto que es una variable numerica
+# Noto que es una columna numerica
 # NOTA: para deshacer vectores del tipo haven_labelled
 # aplico la funcion as.numeric
 
@@ -66,12 +68,12 @@ Antropometria$peso_unlabelled <- as.numeric(Antropometria$peso)
 
 class(Antropometria$peso_unlabelled)
 
-# ESTO SOLO ES RECOMENDABLE EN VARIABLES QUE
+# ESTO SOLO ES RECOMENDABLE EN COLUMNAS QUE
 # VERDADERAMENTE SEAN NUMERICAS COMO EN ESTE CASO
 
 # Otro ejemplo:
 class(Antropometria$est_urb)
-# La variable estrato urbano, esta codificada como
+# La columna estrato urbano, esta codificada como
 # numerica pero en verdad son categorias:
 
 Antropometria$est_urb
@@ -109,14 +111,15 @@ quantile(Antropometria$edad, probs = seq(0, 1, 1/5)) # quintil
 sd(Antropometria$edad)
 summary(Antropometria$edad)
 
-# Contar observaciones de variables 
+# Contar observaciones de columnas 
 # funcion table
 table(Antropometria$sexo)
 table(Antropometria$edad)
-table(Antropometria$sexo, exclude = NULL) # tambien categoria de missings
+table(Antropometria$ropa)
+table(Antropometria$ropa, exclude = NULL) # tambien categoria de missings
 
-is.na(Antropometria$sexo)
-table(is.na(Antropometria$sexo)) # checar missings
+is.na(Antropometria$ropa)
+table(is.na(Antropometria$ropa)) # checar missings
 
 
 # Subconjunto de datos =========================================
@@ -142,6 +145,16 @@ which(Antropometria$peso > 60) # cuales filas cumplen mi condicion
 
 # Paso 2. Usar estructura para seleccionar valores 
 Antropometria[which(Antropometria$peso > 60),]
+# Mismo resultado SI NO tenemos NA's
+Antropometria[Antropometria$peso > 60,]
+
+# Checo 
+nrow(Antropometria[which(Antropometria$peso > 60),])
+nrow(Antropometria[Antropometria$peso > 60,])
+
+# which() NO incluye missings
+# no usar which incluye missings
+
 # Paso 3. Si lo deseo guardar nuestro resultado
 peso60 <- Antropometria[which(Antropometria$peso > 60),]
 
@@ -156,15 +169,15 @@ summary(peso60$peso)
 pesoedad60 <- Antropometria[which(Antropometria$peso > 60 & Antropometria$edad >60),]
 Antropometria[which(Antropometria$peso > 60 | Antropometria$edad >60),]
 
-# Crear una nueva variable
+# Crear una nueva columna
 Antropometria$mi_imc <- Antropometria$peso/(Antropometria$talla/100)^2
 
 
-# Inicializar una variable vacia
+# Inicializar una columna vacia
 Antropometria$sexo_lab <- NA #otra opcion (que no recomiendo)
 Antropometria$sexo_lab <- rep(NA, nrow(Antropometria)) # esta opcion si recomiendo
 
-# Reescribir variable anterior en funcion a otra columna (sexo)
+# Reescribir columna anterior en funcion a otra columna (sexo)
 Antropometria$sexo_lab[Antropometria$sexo == 1] <- "Hombre"
 Antropometria$sexo_lab[Antropometria$sexo == 2] <- "Mujer"
 
@@ -179,7 +192,8 @@ table(Antropometria$sexo_lab, exclude = NULL)
 # Funcion ifelse (equivalente a lo de arriba)
 Antropometria$sexo_lab <- rep(NA, nrow(Antropometria))
 
-Antropometria$sexo_lab <- ifelse(test = Antropometria$sexo == 1, yes = "Hombre",
+Antropometria$sexo_lab <- ifelse(test = Antropometria$sexo == 1, 
+                                 yes = "Hombre",
                                  no ="Mujer")
 
 
@@ -194,14 +208,14 @@ table(Antropometria$sexo_lab, exclude = NULL)
 # ifelse anidados (posible pero que flojera)
 
 # Alternativa:
-# Crear una nueva variable
-# Inicializar una variable vacia
+# Crear una nueva columna
+# Inicializar una columna vacia
 
 Antropometria$edad_cat <- rep(NA, nrow(Antropometria))
 #Antropometria$edad_cat <- NA # es equivalente
 table(Antropometria$edad_cat, exclude = NULL) # Visualmente
 
-# Reescribir variable anterior en funcion a otra columna (edad)
+# Reescribir columna anterior en funcion a otra columna (edad)
 Antropometria$edad_cat[Antropometria$edad<30] <- "0-20’s"
 Antropometria$edad_cat[Antropometria$edad>=30 & Antropometria$edad<40] <- "30’s"
 Antropometria$edad_cat[Antropometria$edad>=40 & Antropometria$edad<50] <- "40’s"
@@ -216,7 +230,14 @@ table(Antropometria$edad_cat, exclude = NULL)
 
 ver <- Antropometria[, c("edad","edad_cat")]
 
-# Introduccion a dplyr ===================================
+
+
+
+# HASTA AQUI YA APRENDIMOS A USAR LENGUAJE BASICO DE R :)
+
+
+
+# Introduccion a dplyr (ver diapositivas)===================================
 
 # glimpse
 
@@ -229,9 +250,16 @@ x %>% max  # a x aplica la funcion max()
 # es lo mismo que
 max(x)
 
+# permiten tomar la salida de una función y enviarla directamente a la
+# siguiente, lo cual es útil cuando necesita hacer muchas cosas con el mismo
+# conjunto de datos
+
+x %>% max %>% length
+
+
 # Seleccionar solo las columnas que me interesan
 
-mini_antro2 <- select(Antropometria, peso, talla)
+mini_antro <- select(Antropometria, peso, talla)
 mini_antro <- Antropometria[, c("peso", "talla")] #equivalente
 
 # con pipes
@@ -241,7 +269,7 @@ mini_antro_pipes <- Antropometria %>% select(peso, talla)
 # Seleccionar solo las filas que me interesan
 # Paso 1. Establecer caracteristica que deseo
 peso60 <- filter(Antropometria, peso > 60)
-peso60 <- Antropometria[Antropometria$peso > 60, ]
+peso60 <- Antropometria[which(Antropometria$peso > 60), ]
 
 
 # con pipes
@@ -256,16 +284,16 @@ peso60_pipes <- Antropometria %>% filter(peso > 60)
 pesoedad60 <- filter(Antropometria, peso > 60 & edad >60)
 pesoedad60 <- filter(Antropometria, peso > 60, edad >60) #equivalente
 # es equivalente a
-pesoedad60 <- Antropometria[Antropometria$peso > 60 & Antropometria$edad >60, ]
+pesoedad60 <- Antropometria[which(Antropometria$peso > 60 & Antropometria$edad >60), ]
 
 apesoedad60 <- filter(Antropometria, peso > 60 | edad >60) # al menos una
 
 
 
-# Crear una nueva variable
+# Crear una nueva columna
 
 # Con base R
-# Inicializar una variable vacia
+# Inicializar una columna vacia
 Antropometria$tres <- rep(NA, nrow(Antropometria))
 Antropometria$tres <- 3
 
@@ -276,14 +304,15 @@ Antropometria <- mutate(Antropometria, dos = 2)
 # con pipes
 Antropometria <- Antropometria %>% mutate(uno = 1)
 
-# Crear una nueva variable en funcion a otras
+# Crear una nueva columna en funcion a otras
 Antropometria <- mutate(Antropometria, mi_imc = peso/((talla)/100)^2)
+# Equivalente
 Antropometria$mi_imc <- Antropometria$peso/(Antropometria$talla/100)^2
 
 # con pipes
 Antropometria <- Antropometria %>% mutate(mi_imc2 = peso/((talla)/100)^2)
 
-# Nueva variable en funcion a otra columna (sexo)
+# Nueva columna en funcion a otra columna (sexo)
 
 # Funcion case_when
 Antropometria <- mutate(Antropometria, 
@@ -314,10 +343,12 @@ table(Antropometria$edad_cat_pipe, exclude = NULL)
 
 
 # Exportar datos ======================================
-# write
+
+# Funcion write (puede venir de diferentes paquetes)
 write_dta(mini_antro_pipes, path = "~/Documents/GitHub/Rbasico/mini_antro.dta")
 write_csv(mini_antro_pipes, file ="~/Documents/GitHub/Rbasico/mini_antro.csv")
-# save
+
+# Funcion save
 save(mini_antro_pipes, file = "~/Documents/GitHub/Rbasico/mini_antro.rda")
 # Para leer formato rda
 #load("~/Documents/GitHub/Rbasico/mini_antro.rda")
