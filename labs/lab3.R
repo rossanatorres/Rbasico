@@ -68,7 +68,8 @@ ggplot()
 
 # Opcion 1. Agrego mis datos y las variables que quiero graficar
 
-ggplot(data = Antropometria, aes(x = edad, y = talla)) 
+ggplot(data = Antropometria, 
+       aes(x = edad, y = talla)) 
 
 # Notemos que aun no pasa nada
 
@@ -76,7 +77,8 @@ ggplot(data = Antropometria, aes(x = edad, y = talla))
 
 # notar que las variables que quiero graficar van dentro de
 # la funcion aes()
-ggplot(data = Antropometria, aes(x = edad, y = talla)) +
+ggplot(data = Antropometria, 
+       aes(x = edad, y = talla)) +
   geom_point()
 
 # Agrego color
@@ -202,7 +204,7 @@ ggsave(filename = "migrafica2.png", plot = migrafica)
 
 
 # Opcion 2 para guardar (mejor resolucion)
-# Siempre que usemos la funcion pdf
+# Llamo la funcion pdf
 pdf(file = "~/Documents/GitHub/Rbasico/migrafica3.pdf",
     width = 10, height = 7)
 
