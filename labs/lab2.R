@@ -27,7 +27,7 @@ getwd()
 # data <- read_excel("files/out_agecat_reclassifed1_weighted_2021.xlsx")
 
 # #Leer libro de excel
-# data_list <- import_list("files/out_agecat_reclassifed1_weighted_2021.xlsx", 
+# data_list <- import_list("files/out_agecat_reclassifed1_weighted_2021.xlsx",
 #                          setclass = "data.frame")
 # age_cat1 = data_list[[1]] #seleccionar primera hoja de calculo
 # age_cat1 = data_list$agecat_1 #seleccionar primera hoja de calculo
