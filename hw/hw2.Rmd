@@ -61,7 +61,13 @@ summary(Antropometria$talla_unlabelled)
 
 ## Problema 2. Manejo de datos
 1. Crea una nueva variable llamada id, que junte las variables folio e intp
-2. Usa la funcion unique() para contar el numero de ids unicos.
+
+**HINT: Usa la funcion paste0**
+
+2. Usa la funcion unique() para *contar* el numero de ids unicos.
+
+**HINT: Usa primero la funcion unique y despues la funcion length**
+
 3. Selecciona las variables sexo, edad, peso y talla
 a) Usando base R
 b) Usando dplyr
