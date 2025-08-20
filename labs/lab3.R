@@ -41,7 +41,7 @@ ver <- select(Antropometria, edad, talla)
 
 Antropometria <- filter(Antropometria, talla <222)
 
-# Personalizar 
+# Personalizar (ver diapositivas)
 plot(x = Antropometria$edad, y = Antropometria$talla,
      main = "Edad vs talla", 
      xlab = "Edad (años)", 
@@ -99,7 +99,8 @@ ggplot() +
   geom_point(data = Antropometria, 
              aes(x = edad, 
                  y = talla), 
-             color = "tomato3"
+             color = "tomato3",
+             size = 1
              )
 
 # Ejemplo:
@@ -179,8 +180,8 @@ ggplot() +
        color = "Sexo") +
   # Agrego capa para color
   scale_color_manual(values = c("Hombres" = "magenta4",
-                                "Mujeres" = "magenta2")) 
-  #theme_classic()
+                                "Mujeres" = "magenta2")) +
+  theme_classic()
 
 
 
