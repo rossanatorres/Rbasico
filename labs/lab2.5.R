@@ -22,14 +22,25 @@ glimpse(FFQ)
 
 
 # Resumen de ayer y ventaja de usar pipes =====
+
+FFQchiquita <- FFQ %>% 
+  # select(identifier, sexo, edadanos, region, sexo, edadanos,
+  #        alimento, consumo) %>% 
+  mutate(edad_entero = round(edadanos)) #%>% 
+  #dplyr::filter(edadanos >50)
+
 FFQ <- FFQ %>% 
        select(identifier, sexo, edadanos, region, sexo, edadanos,
               alimento, consumo) %>% 
-       mutate(edad_entero = round(edadanos)) 
+       mutate(edad_entero = round(edadanos)) #%>% 
+       #dplyr::filter(edadanos >50)
+
+
+
 
 # Ojo cuando filtro porque pierdo observaciones,
-FFQnse <- FFQ %>% 
-       filter(nse5f == "muy alto")
+# FFQnse <- FFQ %>% 
+#        filter(nse5f == "muy alto")
 
 
 # seleccionar
@@ -54,6 +65,11 @@ tipobebidas <- FFQ %>%
                # Hago un "resumen" por grupo 
                # (en este caso quiero sumar)
                summarise(ssb_tot = sum(consumo))
+
+# Si solo uso group_by no pasa nada
+# ver <- FFQ %>% 
+#   # Agrupo por tipo de bebida
+#   group_by(alimento)
 
 
 # Consumo de ssb por region y alimento
