@@ -45,6 +45,18 @@ sum(x)/length(x)
 mean(x)
 
 
+miMedia <- function(vector){
+  
+  
+  media <- sum(vector)/length(vector)
+  
+  return(media)
+  #return(sum(vector)/length(vector))
+  
+}
+
+miMedia(x)
+
 # Ejemplo basico para que entendamos como definir
 # funciones
 
@@ -130,10 +142,10 @@ agruparSumar <- function(data, grupo, sum_var){
 tipobebidas_fun <- agruparSumar(data = FFQ, grupo = alimento, 
                     sum_var = consumo)
 
-# Equivalente
-tipobebidas <- FFQ %>% 
-  group_by(alimento) %>% 
-  summarise(ssb_tot = sum(consumo))
+# # Equivalente
+# tipobebidas <- FFQ %>% 
+#   group_by(alimento) %>% 
+#   summarise(ssb_tot = sum(consumo))
 
 
 # Consumo por region
@@ -142,9 +154,9 @@ region_fun <- agruparSumar(data = FFQ, grupo =region,
 
 
 # Equivalente  
-region <- FFQ %>% 
-  group_by(region) %>% 
-  summarise(ssb_tot = sum(consumo))
+# region <- FFQ %>% 
+#   group_by(region) %>% 
+#   summarise(ssb_tot = sum(consumo))
 
 # consumo de ssb por individuo
 ssb_tot_indiv_fun <- agruparSumar(data = FFQ, 
@@ -174,7 +186,6 @@ ssb_tot_indiv <- FFQ %>%
 
 # Verificar si un vector es numerico
 
-vector = c(1:10)
 
 if(is.numeric(vector)){
   
@@ -254,11 +265,16 @@ if(x > 1){
 # Iteraciones (ver diapositivas)==========================================
 
 # Cuerpo, NO CORRER
+
 # for (elemento in secuencia) { 
 #   
 #    # alguna operacion
 #     
 # }
+
+# secuencia: de donde empiezo a recorrer a donde termino
+# de recorrer. Ejemplo: del 1 al 20 (1:20), 1:nrow(df) (de la
+# primera fila a ultima, etc)
 
 # Ejemplo facil:
 vector <- c("Rossana", "Torres", "Alvarez")
@@ -329,15 +345,19 @@ median(df$d)
 medianas_manual <- c(median(df$a), median(df$b),
                      median(df$c), median(df$d))
 
-#medianas_loop <- c(NA, NA, NA, NA, NA, NA)
+# Porque ya sabemos que la longitud del resultado es 4
+medianas_loop <- c(NA, NA, NA, NA)
+
+# SI NO SABEMOS O QUEREMOS ALGO MAS CORTO ALTERNATIVA
+# USAR VECTOR VACIO
 medianas_loop <- c()
   
-for (columna in 1:ncol(df)) {
-  
-  #columna <- 1
-  #median(df[,columna])
- 
-  medianas_loop[columna] <- median(df[,columna])
+
+
+
+for (c in 1:ncol(df)) {
+
+  medianas_loop[c] <- median(df[,c])
   
 }
 
@@ -350,3 +370,6 @@ medianas_loop_dplyr <- df %>%
                    .fns = ~median(.x, na.rm = TRUE))) %>%
   as.numeric()
 
+
+# A veces los for loops son muy lentos entonces debemos
+# Buscar alternativas con otros paquetes

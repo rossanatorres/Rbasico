@@ -44,10 +44,10 @@ Antropometria <- Antropometria %>%
 
 
 
-mydesign <- svydesign(id = ~ identifier, 
+mydesign <- svydesign(id = ~code_upm, 
                       strata = ~est_var, 
-                      weights = ~pondef ,
-                      PSU = ~code_upm, data = Antropometria) 
+                      weights = ~pondef,
+                      data = Antropometria) 
 options(survey.lonely.psu = "adjust")
 
 
@@ -109,8 +109,9 @@ confint(svymean(~imc_cat, design = mydesign))
 # Problema que quiero resolver:
 # Hacer una tabla con la proporcion de categorias de imc por sexo
 
+disenoHombres = subset(mydesign, sexo == 1)
 # Opcion 1. Estimar por sexo separado y pegar a mano en tabla
-svymean(~factor(imc_cat), design = subset(mydesign, sexo == 1))
+svymean(~factor(imc_cat), design = disenoHombres)
 confint(svymean(~factor(imc_cat), design = subset(mydesign, sexo == 1)))
 
 svymean(~factor(imc_cat), design = subset(mydesign, sexo == 2))
@@ -141,6 +142,7 @@ colnames <- c("Hombres", "Mujeres")
 for (sex in 1:2) {
   
   #sex <- 1
+  
   table[, colnames[sex]] <- (coef(svymean(~factor(imc_cat), 
           design = subset(mydesign, 
                           sexo == sex))))*100
