@@ -56,10 +56,14 @@ svymean(~peso, design = mydesign)
 
 mean(Antropometria$peso)
 
-class(svymean(~peso, design = mydesign))
+weighted_mean <- sum(Antropometria$peso * Antropometria$pondef) / sum(Antropometria$pondef)
+weighted_mean
+
 
 mi_media <- svymean(~peso, design = mydesign)
 mi_media
+class(mi_media)
+
 # Extraer elementos de objeto svystat
 mi_media[1] 
 mi_media[[1]] 
@@ -67,13 +71,21 @@ mi_media[[1]]
 mi_media[2] 
 
 # Usando wrappers
+# Extraigo mi estimador central
 coef(mi_media)
+# Extraigo mi SE
 SE(mi_media)
-attr(mi_media, "var")
+
+# Funcion para estimar intervalos de confianza
+confint(mi_media)
+# lo mismo
 confint(svymean(~peso, design = mydesign))
+
 CI <- confint(mi_media)
 class(CI)
 dim(CI)
+
+# Hay que tener cuidado con los objetos!!!!
 
 # Estimar proporcion por categorias ======================
 

@@ -37,7 +37,16 @@ Antropometria <- read_dta("~/Documents/GitHub/Rbasico/files/Antropometria.dta")
 #   
 # }
 
-# Ejemplo basico
+# Ejemplo extra basico
+x <- 1:10
+# Media manual
+sum(x)/length(x)
+# Media con funcion ya definida
+mean(x)
+
+
+# Ejemplo basico para que entendamos como definir
+# funciones
 
 # estimar imc
 estIMC = function(kg, mt){
@@ -149,7 +158,7 @@ ssb_tot_indiv <- FFQ %>%
   summarise(ssb_tot = sum(consumo, na.rm = TRUE))
 
 
-# if else statement ==================================
+# if else statement (ver diapositivas)==================================
 
 # Estructura general:
 # Cuerpo de un ifelse NO CORRER
@@ -242,7 +251,7 @@ if(x > 1){
 
     }
 
-# Iteraciones ==========================================
+# Iteraciones (ver diapositivas)==========================================
 
 # Cuerpo, NO CORRER
 # for (elemento in secuencia) { 
@@ -282,6 +291,13 @@ if(x[i] > 1){
   }
 
 }
+
+# ifelse es una funcion que hace que un if else
+# statement funcione para vectores, es decir,
+# ifelse es una funcion vectorizada
+ifelse(x >1, "X es mayor que 1", 
+       "X es menor que 1")
+
 
 # Modificar algun objeto
 
@@ -326,6 +342,11 @@ for (columna in 1:ncol(df)) {
 }
 
 medianas_loop
-#rbind(df, medianas)
 
+
+# Equivalente pero con dplyr
+medianas_loop_dplyr <- df %>%
+  summarise(across(.cols = everything(), 
+                   .fns = ~median(.x, na.rm = TRUE))) %>%
+  as.numeric()
 

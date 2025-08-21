@@ -138,7 +138,10 @@ tbl <- survey::svydesign(ids = ~identifier,
                  label = imc_cat ~ "Categoria de IMC",
                  digits = everything() ~ 1)
 
-# Usar paquete flextable
+# Usar paquete flextable 
+# Para instalar:
+# install.packages("flextable")
+library(flextable)
 tbl %>%
   as_flex_table() %>%
   flextable::set_table_properties(layout = "autofit", 
