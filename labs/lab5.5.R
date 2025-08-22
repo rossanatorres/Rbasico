@@ -169,3 +169,8 @@ tbl %>%
   flextable::set_table_properties(layout = "autofit", opts_word = list(split = TRUE)) %>%
   flextable::save_as_pptx(path = "mitablalinda.pptx") # R plots or graphic files (png, pdf and jpeg) and HTML, Word, PDF and PowerPoint
 
+
+
+
+
+

@@ -1,0 +1,61 @@
+---
+title: "PASPE 2025 Antropometria"
+author: "Rossana Torres-Alvarez"
+date: "`r Sys.Date()`"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(survey)
+library(haven)
+library(readstata13)
+
+Antropometria <- read_stata("~/Documents/GitHub/Rbasico/files/Antropometria.dta")
+
+
+```
+
+1.	Carga la base de Antropometría y las librerías haven, tidyverse, survey y gtsummary
+
+2.	Remueve TODAS las etiquetas de las variables de la base
+
+```{r}
+Antropometria<-haven::zap_labels(Antropometria)
+
+```
+3. Crea la variables identifier, sexo_lab, imc e imc_cat como en el lab5.5.R
+
+```{r}
+# Crear mi identificador
+Antropometria$identifier <- factor(paste0("folio_",
+                                          Antropometria$folio,
+                                          "__intp_",
+                                          Antropometria$intp))
+
+
+Antropometria <- Antropometria %>% 
+  mutate(imc = peso/(talla/100)^2,
+         imc_cat = case_when(imc < 18.5 ~ "Bajo peso",
+                             imc >= 18.5 & imc < 25 ~ "Normal",
+                             imc >= 25 & imc < 30 ~ "Sobrepeso",
+                             imc >= 30  ~ "Obesidad"))
+
+Antropometria$imc_cat <- factor(Antropometria$imc_cat,
+                                levels = c("Bajo peso",
+                                           "Normal",
+                                           "Sobrepeso",
+                                           "Obesidad"))
+
+```
+
+
+Ejemplo de imprimir algo
+
+```{r}
+table(Antropometria$imc_cat, exclude = NULL)
+
+```
+
+
