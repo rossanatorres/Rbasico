@@ -94,7 +94,7 @@ print(medias)
 
 2. Instala el paquete nycflights13. Al cargar el paquete, tendrás disponible una base de datos llamada flights. Verifica qué clase de objeto es la base flights. Si es necesario, conviértela a data.frame. Determina el tipo de cada columna en la base usando un for loop. Si la consola te da un warning lee con cuidado y verifica tu resultado.
 
-```{r, warning=FALSE, echo=FALSE, eval=FALSE}
+```{r, warning=TRUE, echo=FALSE, eval=FALSE}
 #install.packages("nycflights13") # Esto solo se hace una vez en la vida!!
 library(nycflights13)
 
@@ -110,7 +110,7 @@ print(tipo)
 
 for (col in 1:ncol(flights_df)) {
 
- tipo[col] <- (class(flights_df[,col]))
+ tipo[col] <- (class(flights_df[,col]))[1]
   
 }
 
@@ -120,7 +120,7 @@ print(tipo)
 
 
 3. Escribir un for loop que calcule el número de valores únicos en cada columna del dataframe iris (precargada en R). Si la consola te da un warning lee con cuidado y verifica tu resultado.
-```{r, warning=FALSE, eval = FALSE, echo=FALSE}
+```{r, warning=TRUE, eval = FALSE, echo=FALSE}
 
 
 unicos <- c()

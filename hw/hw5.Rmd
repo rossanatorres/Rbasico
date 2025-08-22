@@ -9,7 +9,7 @@ output:
 
 ## Pregunta 1. gtsummary
 1. Carga la base de Antropometría y las librerías haven, tidyverse, survey y gtsummary
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, echo=FALSE}
 library(tidyverse)
 library(survey)
 library(haven)
@@ -23,7 +23,7 @@ Antropometria <- read_stata("~/Documents/GitHub/Rbasico/files/Antropometria.dta"
 
 2. Remueve TODAS las etiquetas de las variables de la base
 
-```{r, echo = TRUE, eval=TRUE}
+```{r, echo = FALSE, eval=TRUE}
 
 
 # Remuevo las etiquetas de las variables como en lab5.5
@@ -32,7 +32,7 @@ Antropometria<-haven::zap_labels(Antropometria)
 ```
 
 3. Crea la variables $identifier$, $sexo\_lab$, $imc$ e $imc\_cat$ como en el lab5.5.R
-```{r, echo=TRUE, eval=TRUE}
+```{r, echo=FALSE, eval=TRUE}
 # Crear mi identificador
 Antropometria$identifier <- factor(paste0("folio_",
                                           Antropometria$folio,
@@ -62,7 +62,7 @@ Antropometria$imc_cat <- factor(Antropometria$imc_cat,
 
 4. Selecciona las variables: $edad$, $sexo\_lab$, $peso$, $talla$, $imc\_cat$ y las variables de diseño de muestra: $identifier$, $code\_upm$, $pondef$, $est\_var$ de la base Antropometría y guardalas en un nuevo dataframe llamado $antro\_mini$. Asegurate de que la variable $pondef$ no tenga valores $NA$
 
-```{r, echo = TRUE, eval=TRUE}
+```{r, echo = FALSE, eval=TRUE}
 
 # Selecciono variables que quiero, tiro NAs de ponderador
 antro_mini <- Antropometria %>% 
@@ -73,9 +73,9 @@ antro_mini <- Antropometria %>%
 
 5. Intenta recrear la siguiente tabla con diseño muestral con gtsummary:
 
-```{r, echo = TRUE, message = FALSE}
+```{r, echo = FALSE, message = FALSE, eval = TRUE}
 options(survey.lonely.psu = "adjust")
-survey::svydesign(ids = ~identifier,
+survey::svydesign(ids = ~code_upm,
                   strata=~est_var,
                   weights = ~pondef,
                   data=antro_mini)%>%
@@ -87,4 +87,4 @@ survey::svydesign(ids = ~identifier,
 ```
 
 ## Pregunta 2. R Markdown
-6. OPCIONAL. Intenta crear un R Markdown file (devuelva un documento en formato html) que contenga las respuestas de esta tarea.
+6. OPCIONAL. Intenta crear un R Markdown file (devuelva un documento en formato html) que contenga las respuestas de esta tarea. (**Nota: En la pregunta 5, ya no es necesario usar flextable para guardar nuestra tabla porque ya estamos creando el documento con Markdown :)**)

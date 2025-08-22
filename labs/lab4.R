@@ -71,7 +71,7 @@ estIMC = function(kg, mt){
 
 # Probar mi funcion
 
-estIMC(kg = 50, mt = 1.53)
+estIMC(50, 1.53)
 
 imc_fun <- estIMC(kg = 50, mt = 1.53)
 imc_fun
@@ -84,8 +84,8 @@ imc_manual
 
 # Probar mi funcion con base Antropometria
 
-imc_vec <- estIMC(kg = Antropometria$peso, 
-                  mt = Antropometria$talla/100)
+imc_vec <- estIMC(Antropometria$peso, 
+                  Antropometria$talla/100)
 
 summary(imc_vec)
 

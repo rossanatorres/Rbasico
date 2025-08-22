@@ -3,11 +3,15 @@ library(tidyverse)
 library(survey)
 library(haven)
 library(readstata13)
+# install.packages("gtsummary")
 library(gtsummary)
+
+setwd("~/Documents/GitHub/Rbasico")
 
 # Antropometria**********
 # Yo tengo la base guardada aqui
 Antropometria <- read_stata("~/Documents/GitHub/Rbasico/files/Antropometria.dta")
+
 # Crear mi identificador
 Antropometria$identifier <- factor(paste0("folio_",
                                           Antropometria$folio,
@@ -40,7 +44,17 @@ Antropometria <- Antropometria %>%
 
 
 # REMOVER TODAS LAS ETIQUETAS!!!!!!!!!!!!!!
+# Lo necesitamos porque gtsummary no 
+# funciona con variables etiquetadas
 Antropometria<-haven::zap_labels(Antropometria)
+
+# Nota: la linea paquete::funcion, sirve para
+# cargar una funcion directamente de un paquete
+# sin tener que cargar todo el paquete o cuando
+# una funcion tiene el mismo nombre en diferentes
+# paquetes y estoy usando ambos paquetes al mismo
+# tiempo, entonces tengo que especificar
+# cual funcion y de cual paquete quiero usar
 
 Antropometria <- Antropometria %>% 
   mutate(sexo_lab = case_when(sexo == 1~ "Hombre",
@@ -53,7 +67,8 @@ library(gtsummary)
 
 
 antro_mini <- select(Antropometria,
-                     edad, sexo_lab, peso, talla, imc_cat)
+                     edad, sexo_lab, 
+                     peso, talla, imc_cat)
 
 antro_mini %>% 
   tbl_summary()
@@ -113,12 +128,12 @@ antro_mini %>%
 #Muy bonito pero y el diseno muestral?
 
 antro_mini_svy <- Antropometria %>% 
-  select(sexo_lab, imc_cat, identifier, code_upm, pondef, est_var)
+  select(sexo_lab, imc_cat, code_upm, pondef, est_var)
 
 # En vez de la base, aplicare la funcion tbl_svysummary  a 
 # mi diseno muestral
 options(survey.lonely.psu = "adjust")
-survey::svydesign(ids = ~identifier,
+survey::svydesign(ids = ~code_upm,
                   strata=~est_var,
                   weights = ~pondef,
                   data=antro_mini_svy)%>%
@@ -129,7 +144,7 @@ survey::svydesign(ids = ~identifier,
 
 # Muy bonito pero y donde guardo mi tabla o que?
 
-tbl <- survey::svydesign(ids = ~identifier,
+tbl <- survey::svydesign(ids = ~code_upm,
                   strata=~est_var,
                   weights = ~pondef,
                   data=antro_mini_svy)%>%
