@@ -21,7 +21,7 @@ Antropometria <- read_dta("~/Documents/GitHub/Rbasico/files/Antropometria.dta")
 3. Estima los cuartiles de talla
 4. Estima la talla minima y la talla maxima
 
-```{r, echo=FALSE, eval=FALSE, include=FALSE}
+```{r, echo=TRUE, eval=TRUE, include=TRUE}
 # Llamo a la libreria haven porque se que Antropometria tiene un formato dta
 library(haven)
 
@@ -79,7 +79,7 @@ b) Usando dplyr
 a) Usando base R
 b) Usando dplyr
 6. Guarda un dataframe solo para mujeres y uno solo para hombres, llamalos mujeres_df y hombres_df.
-```{r, echo=FALSE, eval=FALSE}
+```{r, echo=TRUE, eval=TRUE, include=TRUE, message=FALSE}
 # 1. Uso el operador $ y la funcion paste0 para juntar las variables folio e intp
 Antropometria$id <- paste0(Antropometria$folio, Antropometria$intp)
 
@@ -94,6 +94,7 @@ head(Antropometria[, c("sexo", "edad", "peso", "talla")], 3)
 # b) Usando dplyr
 # LLAMO A LA LIBRERIA TIDYVERSE AL INICIO DE MI SCRIPT
 library(tidyverse)
+
 head(select(Antropometria, "sexo", "edad", "peso", "talla"), 3)
 
 # 4. Creo una variable llamada imc y estima el indice de masa corporal

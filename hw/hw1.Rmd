@@ -10,7 +10,7 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 ```
 
 ## Problema 1. Operaciones 
@@ -79,11 +79,14 @@ mivector3 = c(mivector1, mivector2)
 
 ```
 
+El error aparece porque el vector2 no existe, además el vector1 se reescribió, así que debo tener cuidado con los nombres de los vectores. 
 
 ```{r}
+
 mivector1 = c(1:100)
 mivector2 = (101:200)
 mivector3 = c(mivector1, mivector2)
+
 ```
 
 ## Problema 2. Vectores, dataframes y listas

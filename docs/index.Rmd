@@ -277,7 +277,7 @@ download_link(
 
 # Respuestas de tareas
 
-```{r, echo=FALSE, include = FALSE}
+```{r, echo=FALSE, include = TRUE}
 download_link(
   link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw1.docx",
   button_label = "Descargar tarea1.docx",
@@ -288,7 +288,7 @@ download_link(
 )
 ```
 
-```{r, echo=FALSE, include = FALSE}
+```{r, echo=FALSE, include = TRUE}
 download_link(
   link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw2.docx",
   button_label = "Descargar tarea2.docx",
@@ -300,7 +300,7 @@ download_link(
 ```
 
 
-```{r, echo=FALSE, include = FALSE}
+```{r, echo=FALSE, include = TRUE}
 download_link(
   link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw3.docx",
   button_label = "Descargar tarea3.docx",
@@ -312,7 +312,7 @@ download_link(
 ```
 
 
-```{r, echo=FALSE, include = FALSE}
+```{r, echo=FALSE, include = TRUE}
 download_link(
   link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw4.docx",
   button_label = "Descargar tarea4.docx",
@@ -325,7 +325,7 @@ download_link(
 
 
 
-```{r, echo=FALSE, include = FALSE}
+```{r, echo=FALSE, include = TRUE}
 download_link(
   link = "https://github.com/rossanatorres/Rbasico/blob/main/hw/hw5.docx",
   button_label = "Descargar tarea5.docx",

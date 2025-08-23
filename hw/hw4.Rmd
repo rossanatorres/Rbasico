@@ -24,7 +24,7 @@ f3 <- function(x, y) {
 ```
 
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 # La funcion repite el elemento y, tantas veces como la longitud del objeto x. Demostracion:
 
 # x es un vector de 3 elementos
@@ -43,7 +43,7 @@ f3(x = c(1:3), y = 1)
 
 2. Escribe una función llamada vectorType, que tenga como input un vector y devuelva la frase: "El vector es numerico" o "El vector es caracter" o "El vector no es ni numerico ni caracter" (Hint: Usa las funciones is.numeric(), is.character())
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 vectorType = function(vector){
   if(is.numeric(vector)) {
     print("El vector es numerico")
@@ -67,8 +67,8 @@ z = c(TRUE, FALSE, NA)
 3. Explica la diferencia entre un if else statement y la función ifelse() que usamos en el laboratorio 2
 
 
-```{r, echo = FALSE, eval=FALSE}
-# La condición dentro de un if else statement nos devuelve un solo valor logico. En cambio, la condición dentro de la funcion ifelse nos devuelve vectores de valores logicos.
+```{r, echo = TRUE, eval=FALSE}
+# La condición dentro de un if else statement nos devuelve un solo valor logico. En cambio, la condición dentro de la funcion ifelse nos devuelve vectores de valores logicos. Por lo tanto, la funcion ifelse nos permite aplicar tests logicos a vectores, es decir, esta funcion esta vectorizada. 
 
 
 ```
@@ -77,7 +77,7 @@ z = c(TRUE, FALSE, NA)
 
 1. Escribir un for loop para calcular la media de cada columna en el dataframe mtcars (precargada).
 
-```{r, warning=FALSE, echo=FALSE, eval=FALSE}
+```{r, warning=FALSE, echo=TRUE, eval=TRUE}
 medias <- c()
 print(medias)
 
@@ -94,7 +94,7 @@ print(medias)
 
 2. Instala el paquete nycflights13. Al cargar el paquete, tendrás disponible una base de datos llamada flights. Verifica qué clase de objeto es la base flights. Si es necesario, conviértela a data.frame. Determina el tipo de cada columna en la base usando un for loop. Si la consola te da un warning lee con cuidado y verifica tu resultado.
 
-```{r, warning=TRUE, echo=FALSE, eval=FALSE}
+```{r, warning=TRUE, echo=TRUE, eval=TRUE}
 #install.packages("nycflights13") # Esto solo se hace una vez en la vida!!
 library(nycflights13)
 
@@ -120,7 +120,7 @@ print(tipo)
 
 
 3. Escribir un for loop que calcule el número de valores únicos en cada columna del dataframe iris (precargada en R). Si la consola te da un warning lee con cuidado y verifica tu resultado.
-```{r, warning=TRUE, eval = FALSE, echo=FALSE}
+```{r, warning=TRUE, eval = TRUE, echo=TRUE}
 
 
 unicos <- c()
